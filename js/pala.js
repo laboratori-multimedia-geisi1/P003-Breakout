@@ -3,7 +3,6 @@ class Pala {
         this.amplada = amplada;
         this.alcada = alcada;
         this.posicio = puntPosicio;
-        
         this.vy = 2;     
         this.vx = 2;               
         this.color = "#fbb"; 
