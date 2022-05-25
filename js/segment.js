@@ -6,8 +6,6 @@ class Segment{
     }
 
     puntInterseccio(segment2){
-
-
         if (this.esTallen(segment2)){
             // converteix segment1 a la forma general de recta: Ax+By = C
             var a1 = this.puntB.y - this.puntA.y;
