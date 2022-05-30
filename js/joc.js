@@ -13,28 +13,9 @@ class Joc{
 
         this.bola = new Bola(new Punt(this.canvas.width/2,this.canvas.height/2),3);
         this.pala = new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
-
-
-        this.rows=5;
-        this.cols=5;
-        this.totxos=[];
-
-        for(let y=0; y<this.rows; y++){
-            this.totxos[y]=[];
-            let y_cord=(2.5*this.canvas.height/4-this.rows*this.totxoalcada)/(this.rows+1)*(y+1)+this.totxoalcada*y;
-            for(let x=0; x<this.cols; x++){
-                let x_cord=(this.canvas.width-this.cols*this.totxoamplada)/(this.cols+1)*(x+1)+this.totxoamplada*x;
-
-                this.totxos[y][x]=new Totxo(
-                    new Punt(
-                        x_cord,
-                        y_cord
-                    ), 
-                    this.totxoamplada, this.totxoalcada, "#00f"
-                );
-            }
-        }
-       
+        this.mur = new Mur(3, this.amplada, this.alcada, this.totxoamplada ,this.totxoalcada);
+        this.totxos=this.mur.generate_totxos()
+        console.log(this.totxos)
 
         this.key = {
             LEFT:{code:37, pressed:false},
@@ -42,7 +23,6 @@ class Joc{
         };
        
 
-      
     }
 
     draw(){
@@ -50,11 +30,9 @@ class Joc{
         this.pala.draw(this.ctx);
         this.bola.draw(this.ctx);
 
-        for(let y=0; y<this.rows; y++){
-            for(let x=0; x<this.cols; x++){
-                this.totxos[y][x].draw(this.ctx)
-            }
-        }
+        this.totxos.forEach(element => {
+            element.draw(this.ctx)
+        });
     }
     clearCanvas(){
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
@@ -87,11 +65,10 @@ class Joc{
     update(){
         this.bola.update();
         this.pala.update();
-        for(let y=0; y<this.rows; y++){
-            for(let x=0; x<this.cols; x++){
-                this.totxos[y][x].draw(this.ctx)
-            }
-        }
+
+        this.totxos.forEach(element => {
+            element.draw(this.ctx)
+        });
         this.draw();
     }
 }
