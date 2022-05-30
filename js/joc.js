@@ -1,5 +1,7 @@
 class Joc{
     constructor(canvas,ctx) {
+        this.levels();
+
         this.canvas = canvas;
         this.ctx = ctx;
         this.amplada = canvas.width;
@@ -13,7 +15,7 @@ class Joc{
 
         this.bola = new Bola(new Punt(this.canvas.width/2,this.canvas.height/2),3);
         this.pala = new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
-        this.mur = new Mur(3, this.amplada, this.alcada, this.totxoamplada ,this.totxoalcada);
+        this.mur = new Mur(this.levels[1], this.amplada, this.alcada, this.totxoamplada ,this.totxoalcada);
         this.totxos=this.mur.generate_totxos()
         console.log(this.totxos)
 
@@ -70,5 +72,51 @@ class Joc{
             element.draw(this.ctx)
         });
         this.draw();
+    }
+
+
+    levels(){
+        this.levels=[
+            {
+                color:"#f00",
+                pos:[
+                    "aaaaa",
+                    "aaaaa",
+                    "aaaaa",
+                    "aaaaa",
+                    "aaaaa"
+                ],
+            },
+            {
+                color:"#0f0",
+                pos:[
+                    "  a  ",
+                    " a a ",
+                    "a a a",
+                    "a a a",
+                    " a a "
+                ],
+            },
+            {
+                color:"#00f",
+                pos:[
+                    " a a ",
+                    "a   a",
+                    " a a ",
+                    "a a a",
+                    "aaaaa"
+                ],
+            },
+            {
+                color:"#ff0",
+                pos:[
+                    "a   a",
+                    " a a ",
+                    "  a  ",
+                    " a a ",
+                    "a   a"
+                ],
+            }
+        ]
     }
 }

@@ -10,9 +10,7 @@
 
 class Mur {
     constructor(level, given_width, given_height, totxo_width, totxo_height){
-        this.levels();
-
-        this.level=this.levels[level];
+        this.level=level;
 
         this.totxo_width=totxo_width;
         this.totxo_height=totxo_height;
@@ -39,53 +37,7 @@ class Mur {
                 }
             }
         }
+        this.totxos=totxos;
         return totxos;
     }
-
-    // aixo aqui??
-    levels(){
-        this.levels=[
-            {
-                color:"#f00",
-                pos:[
-                    "aaaaa",
-                    "aaaaa",
-                    "aaaaa",
-                    "aaaaa",
-                    "aaaaa"
-                ],
-            },
-            {
-                color:"#0f0",
-                pos:[
-                    "  a  ",
-                    " a a ",
-                    "a a a",
-                    "a a a",
-                    " a a "
-                ],
-            },
-            {
-                color:"#00f",
-                pos:[
-                    " a a ",
-                    "a   a",
-                    " a a ",
-                    "a a a",
-                    "aaaaa"
-                ],
-            },
-            {
-                color:"#ff0",
-                pos:[
-                    "a   a",
-                    " a a ",
-                    "  a  ",
-                    " a a ",
-                    "a   a"
-                ],
-            }
-        ]
-    }
-
 }
