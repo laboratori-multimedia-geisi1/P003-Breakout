@@ -4,13 +4,36 @@ class Joc{
         this.ctx = ctx;
         this.amplada = canvas.width;
         this.alcada = canvas.height;
-        this.totxoamplada = 75;
-        this.totxoalcada = 20; // MIDES DEL TOTXO EN PÍXELS
+
+        console.log(this.amplada, this.alcada)
+
+        this.totxoamplada = 50;
+        this.totxoalcada = 10; // MIDES DEL TOTXO EN PÍXELS
         this.totxocolor = "#0ad";
 
         this.bola = new Bola(new Punt(this.canvas.width/2,this.canvas.height/2),3);
         this.pala = new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
-        this.totxo = new Totxo(new Punt((this.canvas.width-120)/2,(this.canvas.height-20)/3), 120, 20, "#0ad");  // només posem un totxo gegant, per veure els xocs
+
+
+        this.rows=5;
+        this.cols=5;
+        this.totxos=[];
+
+        for(let y=0; y<this.rows; y++){
+            this.totxos[y]=[];
+            let y_cord=(2.5*this.canvas.height/4-this.rows*this.totxoalcada)/(this.rows+1)*(y+1)+this.totxoalcada*y;
+            for(let x=0; x<this.cols; x++){
+                let x_cord=(this.canvas.width-this.cols*this.totxoamplada)/(this.cols+1)*(x+1)+this.totxoamplada*x;
+
+                this.totxos[y][x]=new Totxo(
+                    new Punt(
+                        x_cord,
+                        y_cord
+                    ), 
+                    this.totxoamplada, this.totxoalcada, "#00f"
+                );
+            }
+        }
        
 
         this.key = {
@@ -26,9 +49,12 @@ class Joc{
         this.clearCanvas();
         this.pala.draw(this.ctx);
         this.bola.draw(this.ctx);
-        this.totxo.draw(this.ctx);
 
-
+        for(let y=0; y<this.rows; y++){
+            for(let x=0; x<this.cols; x++){
+                this.totxos[y][x].draw(this.ctx)
+            }
+        }
     }
     clearCanvas(){
         this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
@@ -61,8 +87,11 @@ class Joc{
     update(){
         this.bola.update();
         this.pala.update();
-        this.totxo.draw(this.ctx);
+        for(let y=0; y<this.rows; y++){
+            for(let x=0; x<this.cols; x++){
+                this.totxos[y][x].draw(this.ctx)
+            }
+        }
         this.draw();
-
     }
 }
