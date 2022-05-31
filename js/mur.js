@@ -4,14 +4,16 @@
  - Xoc amb els totxos del mur 
  - Xoc amb la pala 
  - Xoc vora inferior, perd vida i reinicialitza 
- - Detecta el final del mur, passant al següent nivell 
- - Gestiona el temps de l'animació, parant quan es canvia de mur.
+ - Detecta el final del mur, passant al següent nivell - ???
+ - Gestiona el temps de l'animació, parant quan es canvia de mur. - ???
 */
 
 class Mur {
     constructor(level, given_width, given_height, totxo_width, totxo_height){
-        this.level=level;
+        this.colors();
 
+        this.level=level;
+        
         this.totxo_width=totxo_width;
         this.totxo_height=totxo_height;
 
@@ -24,7 +26,7 @@ class Mur {
         for(let y=0; y<this.level.pos.length; y++){
             let y_cord=(2.5*this.playground_height/4-this.level.pos.length*this.totxo_height)/(this.level.pos.length+1)*(y+1)+this.totxo_height*y;
             for(let x=0; x<this.level.pos[y].length; x++){
-                if(this.level.pos[y][x]=="a"){
+                if(this.level.pos[y][x]!=" "){
                     let x_cord=(this.playground_width-this.level.pos[0].length*this.totxo_width)/(this.level.pos[0].length+1)*(x+1)+this.totxo_width*x;
 
                     totxos.push(new Totxo(
@@ -32,12 +34,24 @@ class Mur {
                             x_cord,
                             y_cord
                         ), 
-                        this.totxo_width, this.totxo_height, "#00f"
+                        this.totxo_width, this.totxo_height, this.colors[this.level.pos[y][x]]
                     ));
                 }
             }
         }
         this.totxos=totxos;
         return totxos;
+    }
+
+    colors(){
+        this.colors={
+            "r":"#f00",
+            "g":"#0f0",
+            "b":"#00f",
+            "y":"#ff0",
+            "k":"#f0f",
+            "u":"#80f",
+            "o":"#ff9000"
+        }
     }
 }

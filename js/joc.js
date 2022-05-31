@@ -10,12 +10,11 @@ class Joc{
         console.log(this.amplada, this.alcada)
 
         this.totxoamplada = 50;
-        this.totxoalcada = 10; // MIDES DEL TOTXO EN PÍXELS
-        this.totxocolor = "#0ad";
+        this.totxoalcada = 10;
 
         this.bola = new Bola(new Punt(this.canvas.width/2,this.canvas.height/2),3);
         this.pala = new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
-        this.mur = new Mur(this.levels[1], this.amplada, this.alcada, this.totxoamplada ,this.totxoalcada);
+        this.mur = new Mur(this.levels[3], this.amplada, this.alcada, this.totxoamplada ,this.totxoalcada);
         this.totxos=this.mur.generate_totxos()
         console.log(this.totxos)
 
@@ -80,41 +79,41 @@ class Joc{
             {
                 color:"#f00",
                 pos:[
-                    "aaaaa",
-                    "aaaaa",
-                    "aaaaa",
-                    "aaaaa",
-                    "aaaaa"
+                    "rrrrr",
+                    "ggggg",
+                    "bbbbb",
+                    "ooooo",
+                    "uuuuu"
                 ],
             },
             {
                 color:"#0f0",
                 pos:[
-                    "  a  ",
-                    " a a ",
-                    "a a a",
-                    "a a a",
-                    " a a "
+                    "  k  ",
+                    " u u ",
+                    "u u u",
+                    "b b b",
+                    " b b "
                 ],
             },
             {
                 color:"#00f",
                 pos:[
-                    " a a ",
-                    "a   a",
-                    " a a ",
-                    "a a a",
-                    "aaaaa"
+                    " ggg ",
+                    "gu ug",
+                    " ggg ",
+                    "yoyoy",
+                    "rrrrr"
                 ],
             },
             {
                 color:"#ff0",
                 pos:[
-                    "a   a",
-                    " a a ",
-                    "  a  ",
-                    " a a ",
-                    "a   a"
+                    "y   y",
+                    " o o ",
+                    "  r  ",
+                    " o o ",
+                    "y   y"
                 ],
             }
         ]
