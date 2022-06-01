@@ -1,8 +1,9 @@
 class Totxo{
     constructor(puntPosicio,w,h,color){
-      this.posicio = puntPosicio;
-    this.amplada=w; this.alcada=h;         // mides
-    this.color=color;
+        this.posicio=puntPosicio;
+        this.amplada=w; 
+        this.alcada=h;
+        this.color=color;
     }
     get area() {
         return this.amplada * this.alcada;

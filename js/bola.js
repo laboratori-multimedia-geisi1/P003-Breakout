@@ -1,102 +1,111 @@
 class Bola {
     constructor(puntPosicio, radi) {
-        this.radi = radi;
-        this.posicio = puntPosicio;
-        this.vx = 1;
-        this.vy = 3;
-        this.color = "#0095DD";
+        this.radi=radi;
+        this.posicio_principal=puntPosicio
+        this.posicio=this.posicio_principal;
+        this.vx=1;
+        this.vy=3;
+        
+        this.enabled=false
        
     };
 
     draw(ctx) {
         ctx.beginPath();
         ctx.fillStyle = this.color;
-        ctx.arc(this.posicio.x, this.posicio.y, this.radi, 0, 2 * Math.PI);
+        ctx.arc(this.posicio.x, this.posicio.y, this.radi, 0,2*Math.PI);
         ctx.fill();
         ctx.closePath();
     }
+
+    reset(){
+        console.log("new pos")
+        this.posicio=this.posicio_principal;
+    }
+
     mou(x,y){
         this.posicio.x += x;
         this.posicio.y += y;
     }
     update(){
-        let puntActual = this.posicio;
-        let puntSeguent= new Punt(this.posicio.x + this.vx,this.posicio.y + this.vy);
-        let trajectoria= new Segment(puntActual, puntSeguent);
-        let exces;
-        let xoc = false;
+        if(this.enabled){
+            let puntActual=this.posicio;
+            let puntSeguent=new Punt(this.posicio.x+this.vx,this.posicio.y+this.vy);
+            let trajectoria=new Segment(puntActual, puntSeguent);
+            let exces;
+            let xoc=false;
 
-        // START Xoc amb les cantonades del canvas
-        if(trajectoria.puntB.y + this.radi > joc.alcada){
-            exces= (trajectoria.puntB.y + this.radi - joc.alcada)/this.vy;
-            this.posicio.x = trajectoria.puntB.x - exces*this.vx;
-            this.posicio.y = joc.alcada - this.radi;
-            xoc = true;
-            this.vy = -this.vy;
+            // START Xoc amb les cantonades del canvas
+            if(trajectoria.puntB.y + this.radi > joc.alcada){
+                this.posicio.x=this.posicio_principal.x; // not working
+                this.posicio.y=this.posicio_principal.y; // not working
+                this.enabled=false
+                this.vy=-this.vy
+            }
+            if(trajectoria.puntB.y - this.radi < 0){
+                exces= (trajectoria.puntB.y - this.radi)/this.vy;
+                this.posicio.x = trajectoria.puntB.x - exces*this.vx;
+                this.posicio.y = this.radi;
+                xoc = true;
+                this.vy = -this.vy;
 
-            console.log("game over (-1 life)")
-        }
-        if(trajectoria.puntB.y - this.radi < 0){
-            exces= (trajectoria.puntB.y - this.radi)/this.vy;
-            this.posicio.x = trajectoria.puntB.x - exces*this.vx;
-            this.posicio.y = this.radi;
-            xoc = true;
-            this.vy = -this.vy;
+            }
 
-        }
+            if(trajectoria.puntB.x +this.radi > joc.amplada){
+                exces = (trajectoria.puntB.x + this.radi - joc.amplada)/this.vx;
+                this.posicio.x = joc.amplada - this.radi;
+                this.posicio.y = trajectoria.puntB.y -exces * this.vy;
+                xoc = true;
+                this.vx = -this.vx;
+            }
 
-        if(trajectoria.puntB.x +this.radi > joc.amplada){
-            exces = (trajectoria.puntB.x + this.radi - joc.amplada)/this.vx;
-            this.posicio.x = joc.amplada - this.radi;
-            this.posicio.y = trajectoria.puntB.y -exces * this.vy;
-            xoc = true;
-            this.vx = -this.vx;
-        }
-
-        if(trajectoria.puntB.x -this.radi < 0){
-            exces= (trajectoria.puntB.x -this.radi)/this.vx;
-            this.posicio.x = this.radi;
-            this.posicio.y = trajectoria.puntB.y -exces *this.vy;
-            xoc = true;
-            this.vx = -this.vx;
-        }
-        // END
+            if(trajectoria.puntB.x -this.radi < 0){
+                exces= (trajectoria.puntB.x -this.radi)/this.vx;
+                this.posicio.x = this.radi;
+                this.posicio.y = trajectoria.puntB.y -exces *this.vy;
+                xoc = true;
+                this.vx = -this.vx;
+            }
+            // END
 
 
-        //Xocs amb totxos
-        // al tocar un totxo hauria de
+            //Xocs amb totxos
+            
+            for(let i=joc.totxos.length-1; i>=0; --i){
+                let xocTotxo = this.interseccioSegmentRectangle(trajectoria, {
+                    posicio: {x: joc.totxos[i].posicio.x - this.radi, y: joc.totxos[i].posicio.y - this.radi},
+                    amplada: joc.totxos[i].amplada + 2 * this.radi,
+                    alcada: joc.totxos[i].alcada+2*this.radi
+                });
         
-        for(let i=joc.totxos.length-1; i>=0; --i){
-            var xocTotxo = this.interseccioSegmentRectangle(trajectoria, {
-                posicio: {x: joc.totxos[i].posicio.x - this.radi, y: joc.totxos[i].posicio.y - this.radi},
-                amplada: joc.totxos[i].amplada + 2 * this.radi,
-                alcada: joc.totxos[i].alcada+2*this.radi
-            });
-    
-            if (xocTotxo){
-                xoc=true;
-                this.posicio.x=xocTotxo.pI.x;
-                this.posicio.y=xocTotxo.pI.y;
-                switch(xocTotxo.vora){
-                    case "superior":
-                    case "inferior": 
-                        this.vy = -this.vy;
-                        break;
-                    case "esquerra":
-                    case"dreta": 
-                        this.vx = -this.vx;
-                        break;
+                if (xocTotxo){
+                    xoc=true;
+                    this.posicio.x=xocTotxo.pI.x;
+                    this.posicio.y=xocTotxo.pI.y;
+                    switch(xocTotxo.vora){
+                        case "superior":
+                        case "inferior": 
+                            this.vy = -this.vy;
+                            break;
+                        case "esquerra":
+                        case"dreta": 
+                            this.vx = -this.vx;
+                            break;
+                    }
+                    
+                    joc.totxos.splice(i, 1);
                 }
-                
-                joc.totxos.splice(i, 1);
+            }
+
+            if(xoc){ //(!xoc && this.enabled)
+                this.update()
+            }
+            else {
+                this.posicio.x = trajectoria.puntB.x;
+                this.posicio.y = trajectoria.puntB.y;
             }
         }
-
-        if (!xoc){
-            this.posicio.x = trajectoria.puntB.x;
-            this.posicio.y = trajectoria.puntB.y;
-        }
-   
+    
     }
 
     interseccioSegmentRectangle(segment, rectangle){

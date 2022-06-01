@@ -5,7 +5,7 @@ class Pala {
         this.posicio = puntPosicio;
         this.vy = 2;     
         this.vx = 2;               
-        this.color = "#fbb"; 
+        this.color = "#2f2"; 
     }
 
 
@@ -17,6 +17,7 @@ class Pala {
         if(joc.key.LEFT.pressed){
             this.posicio.x = Math.max(0, this.posicio.x - this.vx);
         }
+
     }
 
       

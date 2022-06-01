@@ -2,7 +2,7 @@ class Segment{
     constructor(puntA, puntB){
         this.puntA = puntA;
         this.puntB = puntB;
-        this.color = "#3F3";
+        this.color = "#F00";
     }
 
     puntInterseccio(segment2){

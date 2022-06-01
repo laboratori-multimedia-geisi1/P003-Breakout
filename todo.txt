@@ -1,0 +1,56 @@
+Per fer:
+ - menu principal
+ - contador de hp
+ - la bola vola a direccio random al principi (rang de 60graus o > )
+ - fer que la pala reboti la bola
+ - reset
+ - missatge principal
+ 
+(joc.levels) 
+change the concept of levels.
+color should be equal to difficulty (green=1hp, purple=5hp)
+when a purple one is hit, change color to the one that has 4 hp and etc.
+Example: blue 6hp -> purple 5hp -> red 4hp -> orange 3hp -> yellow 2hp -> green 1hp
+
+(joc.levels.color) is not used.
+if it's needed, can be used to identify form where to start.
+
+
+----------------------------------------------------------------------------------------------------
+
+Al escollir tenir en compte: 
+    el impacte visual
+    dificultat de codi
+    temps q es necesita.
+
+
+Ideas de extras que es poden fer:
+
+ - canvas per tota la pantalla
+    menu i titols amb estil pixelejat.
+    basicament com un joc retro
+
+ - totxo que dispara:
+    aquest hauria de ser un boss level o hauria d'anar al davant de tot
+    per tal de no disparar als demes totxos.
+
+ - totxo que es mou (eix x)
+
+ - boosts pel camp
+    - pilota doble: apareix unaltre pilota
+    - danyo doble
+    - +1 vida pel jugador
+
+    Codi:
+    crear una bola a posicio X,Y on no hi !hagues cap totxo! -> importa aixo?
+    
+ - multiplayer MOLT OP
+    - coop (tot una pantalla)
+    - vs. (pantalla dividida) -- mes dificil
+
+    Codi: 
+    fer el camp mes petit i posar dos pales, una es controla amb les <- -> i l'altre amb A D.
+
+ - sistema de records
+    guardar els resultats en ?memoria?
+    tipo zombies, quantes rondes aguantes. aixo es faria contra un boss o alg aixi
