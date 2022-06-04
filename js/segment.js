@@ -6,9 +6,10 @@ class Segment {
     }
 
     puntInterseccio(segment2) {
-
-
         if (this.esTallen(segment2)) {
+            console.log("============================================================================");
+            console.log("============================================================================");
+            console.log("TENIM UN TALL")
             // converteix segment1 a la forma general de recta: Ax+By = C
             var a1 = this.puntB.y - this.puntA.y;
             var b1 = this.puntA.x - this.puntB.x;
@@ -36,11 +37,19 @@ class Segment {
 
                 console.log("punt intersecció: " + puntInterseccio.x + " " + puntInterseccio.y);
 
+                console.log("----------------");
                 console.log("a1: " + a1 + " b1: " + b1 + " c1: " + c1);
-                console.log(this.contePunt(this.puntA, this.puntB, puntInterseccio));
+                console.log("ContePunt: " + this.contePunt(this.puntA, this.puntB, puntInterseccio));
+                if(!this.contePunt(this.puntA, this.puntB, puntInterseccio)){
+                    this.contePunt(this.puntA, this.puntB, puntInterseccio, true);
+                }
 
+                console.log("----------------");
                 console.log("a2: " + a2 + " b2: " + b2 + " c2: " + c2);
-                console.log(this.contePunt(segment2.puntA, segment2.puntB, puntInterseccio));
+                console.log("ContePunt: " + this.contePunt(segment2.puntA, segment2.puntB, puntInterseccio));
+                if(!this.contePunt(segment2.puntA, segment2.puntB, puntInterseccio)){
+                    this.contePunt(segment2.puntA, segment2.puntB, puntInterseccio, true);
+                }
 
                 console.log("d: " + d);
                 console.log("\n");
@@ -67,14 +76,28 @@ class Segment {
             control(s1p1, s2p1, s2p2) != control(s1p2, s2p1, s2p2));
 
     }
-    contePunt(p1, p2, punt) {
-            return (this.valorDinsInterval(p1.x, punt.x, p2.x) || this.valorDinsInterval(p1.y, punt.y, p2.y));
+    contePunt(p1, p2, punt, print = false) {
+        // retorna cert si el punt està dins del segment
+        if(print) {
+            console.log("p1.x: " + p1.x + " punt.x: " + punt.x + " p2.x: " + p2.x);
+            console.log("Interval x: " + this.valorDinsInterval(p1.x, punt.x, p2.x));
+            this.valorDinsInterval(p1.x, punt.x, p2.x, true);
+            
+            console.log("p1.y: " + p1.y + " punt.y: " + punt.y + " p2.y: " + p2.y);
+            console.log("Interval y: " + this.valorDinsInterval(p1.y, punt.y, p2.y));
+            this.valorDinsInterval(p1.y, punt.y, p2.y, true);
         }
+        return (this.valorDinsInterval(p1.x, punt.x, p2.x) || this.valorDinsInterval(p1.y, punt.y, p2.y));
+    }
         // funció interna
-    valorDinsInterval(a, b, c) {
+    valorDinsInterval(a, b, c, print = false) {
         // retorna cert si b està entre a i c, ambdos exclosos
+        if(print) {
+            console.log("a = b: " + (Math.abs(a - b) < 0.000001));
+            console.log("b = c: " + (Math.abs(b - c) < 0.000001));
+        }
         if (Math.abs(a - b) < 0.000001 || Math.abs(b - c) < 0.000001) { // no podem fer a==b amb valors reals!!
-            return false;
+            return false; // si aquesta linea esta comentada tot funciona a la perfecció, crec
         }
         return (a < b && b < c) || (c < b && b < a);
     }
