@@ -51,7 +51,7 @@ class Joc{
                     e.data.joc.key.RIGHT.pressed=true;
                     break;
                 case e.data.joc.key.SPACE.code:
-                    e.data.joc.bola.enabled=!e.data.joc.bola.enabled;
+                    e.data.joc.bola.enabled=true;
                     break;
             }
         });
