@@ -42,7 +42,7 @@ Ideas de extras que es poden fer:
     - +1 vida pel jugador
 
     Codi:
-    crear una bola a posicio X,Y on no hi !hagues cap totxo! -> importa aixo?
+    crear una bola a posicio X,Y on no hi !hagues cap totxo! -> importa aixo? (POL: la bola pot apareixer a la posicio inicial, allà en teoria no hi hauria de haver cap totxo)
     
  - multiplayer MOLT OP
     - coop (tot una pantalla)
