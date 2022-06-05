@@ -34,13 +34,11 @@ class Bola {
             let trajectoria=new Segment(puntActual, puntSeguent);
             let exces;
             let xoc=false;
+            let xoc_inferior=false;
 
             // START Xoc amb les cantonades del canvas
             if(trajectoria.puntB.y + this.radi > joc.alcada){
-                this.posicio.x=this.posicio_principal.x; // not working
-                this.posicio.y=this.posicio_principal.y; // not working
-                this.enabled=false
-                this.vy=-this.vy
+                xoc_inferior=true;
             }
             if(trajectoria.puntB.y - this.radi < 0){
                 exces= (trajectoria.puntB.y - this.radi)/this.vy;
@@ -99,6 +97,12 @@ class Bola {
 
             if(xoc){ //(!xoc && this.enabled)
                 this.update()
+            }
+            else if(xoc_inferior){
+                this.posicio =new Punt(this.posicio_principal.x, this.posicio_principal.y);
+                this.enabled=false;
+                this.vx=1;
+                this.vy=3;
             }
             else {
                 this.posicio.x = trajectoria.puntB.x;
