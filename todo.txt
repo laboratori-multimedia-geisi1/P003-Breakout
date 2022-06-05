@@ -52,5 +52,5 @@ Ideas de extras que es poden fer:
     fer el camp mes petit i posar dos pales, una es controla amb les <- -> i l'altre amb A D.
 
  - sistema de records
-    guardar els resultats en ?memoria?
+    guardar els resultats en ?memoria? (POL: si que es poden guardar en memoria, tenim dos opcions o de forma temporal fins que es tanqui la sessió o es recarregi la pagina o de fomra permanent amb una cookie, crec que no es dificil i hem sembla que ho va explicar a classe)
     tipo zombies, quantes rondes aguantes. aixo es faria contra un boss o alg aixi
