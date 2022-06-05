@@ -40,10 +40,16 @@ Ideas de extras que es poden fer:
     - pilota doble: apareix unaltre pilota
     - danyo doble
     - +1 vida pel jugador
+    - augment vel pala
+    - reduccio vel bola
 
     Codi:
     crear una bola a posicio X,Y on no hi !hagues cap totxo! -> importa aixo? (POL: la bola pot apareixer a la posicio inicial, allà en teoria no hi hauria de haver cap totxo)
     
+ - !boostos pel camp
+    - augment vel bola
+    - reduccio vel pala
+
  - multiplayer MOLT OP
     - coop (tot una pantalla)
     - vs. (pantalla dividida) -- mes dificil
