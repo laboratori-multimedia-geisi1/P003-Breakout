@@ -38,6 +38,7 @@ class Bola {
 
             // START Xoc amb les cantonades del canvas
             if(trajectoria.puntB.y + this.radi > joc.alcada){
+                //FALTA: restar 1 al contador de vides
                 xoc_inferior=true;
             }
             if(trajectoria.puntB.y - this.radi < 0){
