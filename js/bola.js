@@ -1,8 +1,8 @@
 class Bola {
     constructor(puntPosicio, radi) {
         this.radi=radi;
-        this.posicio_principal=puntPosicio
-        this.posicio=this.posicio_principal;
+        this.posicio_principal=new Punt(puntPosicio.x, puntPosicio.y);
+        this.posicio=new Punt(this.posicio_principal.x, this.posicio_principal.y);
         this.vx=1;
         this.vy=3;
         
