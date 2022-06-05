@@ -1,7 +1,7 @@
 Per fer:
  - menu principal
  - contador de hp
- - la bola vola a direccio random al principi (rang de 60graus o > )
+ - la bola vola a direccio random al principi (rang de 60graus o > ) (FET amb una velociatat aleatoria entre -5 i 5 )
  - fer que la pala reboti la bola (FET)
  - reset
  - missatge principal
