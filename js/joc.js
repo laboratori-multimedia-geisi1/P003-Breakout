@@ -8,7 +8,7 @@ class Joc{
         this.alcada = canvas.height;
 
 
-        this.totxoamplada = 50;
+        this.totxoamplada = 55;
         this.totxoalcada = 10;
 
         this.bola=new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3);
