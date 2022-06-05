@@ -11,9 +11,12 @@ class Joc{
         this.totxoamplada = 55;
         this.totxoalcada = 10;
 
-        this.bola=new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3);
+        // this.bola=new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3);
+        this.boles=[new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3)];
+
+        // this.pala=new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
+        this.pales = [new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4)];
         
-        this.pala=new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
         this.mur=new Mur(this.levels[0],this.amplada,this.alcada/2,this.totxoamplada,this.totxoalcada);
         this.totxos=this.mur.generate_totxos()
 
@@ -28,11 +31,14 @@ class Joc{
 
     draw(){
         this.clearCanvas();
-        this.pala.draw(this.ctx);
-        this.bola.draw(this.ctx);
-
-        this.totxos.forEach(element => {
-            element.draw(this.ctx)
+        this.pales.forEach(pala => {
+            pala.draw(this.ctx);
+        });
+        this.boles.forEach(bola => {
+            bola.draw(this.ctx);
+        });
+        this.totxos.forEach(totxo => {
+            totxo.draw(this.ctx)
         });
     }
     clearCanvas(){
@@ -40,8 +46,9 @@ class Joc{
     }
 
     inicialitza(){
-
-        this.pala.draw(this.ctx);
+        this.pales.forEach(pala => {
+           pala.draw(this.ctx)
+        });
         $(document).on("keydown",{joc:this}, function(e){
             switch(e.keyCode){
                 case e.data.joc.key.LEFT.code:
@@ -51,7 +58,9 @@ class Joc{
                     e.data.joc.key.RIGHT.pressed=true;
                     break;
                 case e.data.joc.key.SPACE.code:
-                    e.data.joc.bola.enabled=true;
+                    e.data.joc.boles.forEach(bola => {
+                        bola.enabled=true;
+                    });
                     break;
             }
         });
@@ -71,8 +80,12 @@ class Joc{
     }
 
     update(){
-        this.bola.update();
-        this.pala.update();
+        this.pales.forEach(pala => {
+            pala.update(this.ctx);
+        });
+        this.boles.forEach(bola => {
+            bola.update(this.ctx);
+        });
 
         this.totxos.forEach(element => {
             element.draw(this.ctx)
