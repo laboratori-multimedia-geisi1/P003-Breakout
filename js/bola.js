@@ -1,14 +1,22 @@
 class Bola {
-    constructor(puntPosicio, radi) {
+    constructor(puntPosicio, radi, joc) {
         this.radi=radi;
+<<<<<<< HEAD
         this.posicio_principal=new Punt(puntPosicio.x, puntPosicio.y);
         this.posicio=new Punt(this.posicio_principal.x, this.posicio_principal.y);
         this.vx=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
         this.vy=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
         console.log("vx: "+this.vx+" vy: "+this.vy);
+=======
+        this.posicio_principal=puntPosicio;
+        this.posicio=puntPosicio;
+        this.vx=1;
+        this.vy=3;
+>>>>>>> da538c1 (s)
         
         this.enabled=false
-       
+
+        this.joc=joc;     
     };
 
     draw(ctx) {
@@ -17,11 +25,6 @@ class Bola {
         ctx.arc(this.posicio.x, this.posicio.y, this.radi, 0,2*Math.PI);
         ctx.fill();
         ctx.closePath();
-    }
-
-    reset(){
-        console.log("new pos")
-        this.posicio=this.posicio_principal;
     }
 
     mou(x,y){
@@ -39,8 +42,19 @@ class Bola {
 
             // START Xoc amb les cantonades del canvas
             if(trajectoria.puntB.y + this.radi > joc.alcada){
+<<<<<<< HEAD
                 //FALTA: restar 1 al contador de vides
                 xoc_inferior=true;
+=======
+                exces= (trajectoria.puntB.y + this.radi - joc.alcada)/this.vy;
+                this.posicio.x = trajectoria.puntB.x - exces*this.vx;
+                this.posicio.y = joc.alcada - this.radi;
+                xoc = true;
+                this.vy = -this.vy;
+                
+                // this.enabled=false
+
+>>>>>>> da538c1 (s)
             }
             if(trajectoria.puntB.y - this.radi < 0){
                 exces= (trajectoria.puntB.y - this.radi)/this.vy;
@@ -98,6 +112,7 @@ class Bola {
             }
             // END
 
+<<<<<<< HEAD
             //Xocs amb pales
             for(let i=joc.pales.length-1; i>=0; --i){
                 let xocPala = this.interseccioSegmentRectangle(trajectoria, {
@@ -166,7 +181,16 @@ class Bola {
             else {
                 this.posicio.x = trajectoria.puntB.x;
                 this.posicio.y = trajectoria.puntB.y;
+=======
+            if(!xoc){
+                this.posicio.x=trajectoria.puntB.x;
+                this.posicio.y=trajectoria.puntB.y;
+>>>>>>> da538c1 (s)
             }
+            
+        } else {
+            this.posicio.x=150;
+            this.posicio.y=100;
         }
     
     }

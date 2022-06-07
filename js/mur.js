@@ -24,9 +24,11 @@ class Mur {
     generate_totxos(){
         let totxos=[];
         for(let y=0; y<this.level.pos.length; y++){
+            // no es lo mes optim, simplement afegir marge+alcada-totxo
             let y_cord=(this.playground_height-this.level.pos.length*this.totxo_height)/(this.level.pos.length+1)*(y+1)+this.totxo_height*y;
             for(let x=0; x<this.level.pos[y].length; x++){
                 if(this.level.pos[y][x]!=" "){
+                    // no es lo mes optim, simplement afegir marge+alcada-totxo
                     let x_cord=(this.playground_width-this.level.pos[0].length*this.totxo_width)/(this.level.pos[0].length+1)*(x+1)+this.totxo_width*x;
 
                     totxos.push(new Totxo(
