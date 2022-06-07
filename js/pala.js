@@ -13,8 +13,8 @@ class Pala {
         if(joc.key.RIGHT.pressed){
             this.posicio.x = Math.min( joc.amplada -this.amplada,
                 this.posicio.x + this.vx)
-        }else
-        if(joc.key.LEFT.pressed){
+        }
+        else if(joc.key.LEFT.pressed){
             this.posicio.x = Math.max(0, this.posicio.x - this.vx);
         }
 
