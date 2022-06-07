@@ -60,3 +60,6 @@ Ideas de extras que es poden fer:
  - sistema de records
     guardar els resultats en ?memoria? (POL: si que es poden guardar en memoria, tenim dos opcions o de forma temporal fins que es tanqui la sessió o es recarregi la pagina o de fomra permanent amb una cookie, crec que no es dificil i hem sembla que ho va explicar a classe)
     tipo zombies, quantes rondes aguantes. aixo es faria contra un boss o alg aixi
+
+ - MOLT OP: 
+    estetica de maquina retro (https://youtu.be/BNqA7MTDUY8)
