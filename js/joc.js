@@ -11,15 +11,11 @@ class Joc{
         this.totxoamplada = 55;
         this.totxoalcada = 10;
 
-<<<<<<< HEAD
         // this.bola=new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3);
         this.boles=[new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3)];
 
         // this.pala=new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
-        this.pales = [new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4)];
-=======
-        this.bola=new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3, this);
->>>>>>> da538c1 (s)
+        this.pales = [new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-40),30,4)];
         
         this.mur=new Mur(this.levels[0],this.amplada,this.alcada/2,this.totxoamplada,this.totxoalcada);
         this.totxos=this.mur.generate_totxos()
@@ -61,16 +57,9 @@ class Joc{
                     e.data.joc.key.RIGHT.pressed=true;
                     break;
                 case e.data.joc.key.SPACE.code:
-<<<<<<< HEAD
                     e.data.joc.boles.forEach(bola => {
                         bola.enabled=true;
                     });
-=======
-                    e.data.joc.bola.enabled=true;
-                    break;
-                case e.data.joc.key.R.code:
-                    e.data.joc.bola.enabled=false
->>>>>>> da538c1 (s)
                     break;
             }
         });

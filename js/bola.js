@@ -1,22 +1,16 @@
 class Bola {
     constructor(puntPosicio, radi, joc) {
         this.radi=radi;
-<<<<<<< HEAD
         this.posicio_principal=new Punt(puntPosicio.x, puntPosicio.y);
         this.posicio=new Punt(this.posicio_principal.x, this.posicio_principal.y);
         this.vx=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
         this.vy=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
         console.log("vx: "+this.vx+" vy: "+this.vy);
-=======
-        this.posicio_principal=puntPosicio;
-        this.posicio=puntPosicio;
-        this.vx=1;
-        this.vy=3;
->>>>>>> da538c1 (s)
         
         this.enabled=false
 
-        this.joc=joc;     
+        this.joc=joc;  
+        this.color="#fff";   
     };
 
     draw(ctx) {
@@ -42,19 +36,8 @@ class Bola {
 
             // START Xoc amb les cantonades del canvas
             if(trajectoria.puntB.y + this.radi > joc.alcada){
-<<<<<<< HEAD
                 //FALTA: restar 1 al contador de vides
                 xoc_inferior=true;
-=======
-                exces= (trajectoria.puntB.y + this.radi - joc.alcada)/this.vy;
-                this.posicio.x = trajectoria.puntB.x - exces*this.vx;
-                this.posicio.y = joc.alcada - this.radi;
-                xoc = true;
-                this.vy = -this.vy;
-                
-                // this.enabled=false
-
->>>>>>> da538c1 (s)
             }
             if(trajectoria.puntB.y - this.radi < 0){
                 exces= (trajectoria.puntB.y - this.radi)/this.vy;
@@ -86,6 +69,7 @@ class Bola {
             //Xocs amb totxos
             
             for(let i=joc.totxos.length-1; i>=0; --i){
+                console.log(1);
                 let xocTotxo = this.interseccioSegmentRectangle(trajectoria, {
                     posicio: {x: joc.totxos[i].posicio.x - this.radi, y: joc.totxos[i].posicio.y - this.radi},
                     amplada: joc.totxos[i].amplada + 2 * this.radi,
@@ -112,7 +96,6 @@ class Bola {
             }
             // END
 
-<<<<<<< HEAD
             //Xocs amb pales
             for(let i=joc.pales.length-1; i>=0; --i){
                 let xocPala = this.interseccioSegmentRectangle(trajectoria, {
@@ -170,8 +153,7 @@ class Bola {
             // Interpretació del xoc
             if(xoc){ //(!xoc && this.enabled)
                 this.update()
-            }
-            else if(xoc_inferior){
+            }else if(xoc_inferior){
                 this.posicio =new Punt(this.posicio_principal.x, this.posicio_principal.y);
                 this.enabled=false;
                 this.vx=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
@@ -181,11 +163,6 @@ class Bola {
             else {
                 this.posicio.x = trajectoria.puntB.x;
                 this.posicio.y = trajectoria.puntB.y;
-=======
-            if(!xoc){
-                this.posicio.x=trajectoria.puntB.x;
-                this.posicio.y=trajectoria.puntB.y;
->>>>>>> da538c1 (s)
             }
             
         } else {

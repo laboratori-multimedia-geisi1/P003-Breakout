@@ -1,4 +1,9 @@
 $(document).ready(function() {
+    h=window.innerHeight*0.9;
+    w=h*2/3;
+    console.log(h,w);
+    $("#principal").html("<canvas id=\"joc\" width=\""+w+"px\" height=\""+h+"px\" ></canvas> ")
+
     let myCanvas=document.getElementById("joc");
     let ctx=myCanvas.getContext("2d");
 

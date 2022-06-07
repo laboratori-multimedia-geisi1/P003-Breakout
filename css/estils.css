@@ -3,6 +3,10 @@
 	box-sizing: border-box;
 }
 
+body {
+	background-color: black;
+}
+
 #principal{
 	width: 100%;
 	text-align: center;
@@ -14,8 +18,9 @@
 
 #joc{
 	position:relative;
-	width: 90%;
-	background: #eee; 
+	/* width: 90%; */
+	background: black; 
+	border: white solid 5px;
 	display: block; 
 	margin: 0 auto;
 }
@@ -36,8 +41,8 @@
 	text-align:right;
 }
 #game {
-	background-color: #eee;  /* color gris clar  */
-	border: #666 50px solid;
+	background-color: black;  /* color gris clar  */
+	border: white 50px solid;
 	border-bottom-width: 0;
 	display: block;
 	margin: 0 auto;
