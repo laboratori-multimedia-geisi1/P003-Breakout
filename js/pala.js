@@ -2,10 +2,9 @@ class Pala {
     constructor(puntPosicio, amplada, alcada){      
         this.amplada = amplada;
         this.alcada = alcada;
-        this.posicio = puntPosicio;
-        this.vy = 4;     
+        this.posicio = puntPosicio;   
         this.vx = 4;               
-        this.color = "#2f2"; 
+        this.color = "#117eba"; 
     }
 
 

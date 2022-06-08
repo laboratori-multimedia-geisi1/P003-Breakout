@@ -63,3 +63,8 @@ Ideas de extras que es poden fer:
 
  - MOLT OP: 
     estetica de maquina retro (https://youtu.be/AMUv8KvVt08)
+
+
+pala :
+h=2.5%*total_h; w=h*2/3;
+

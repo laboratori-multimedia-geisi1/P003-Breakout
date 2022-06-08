@@ -1,5 +1,5 @@
 class Bola {
-    constructor(puntPosicio, radi) {
+    constructor(puntPosicio, radi, joc) {
         this.radi=radi;
         this.posicio_principal=new Punt(puntPosicio.x, puntPosicio.y);
         this.posicio=new Punt(this.posicio_principal.x, this.posicio_principal.y);
@@ -8,7 +8,9 @@ class Bola {
         console.log("vx: "+this.vx+" vy: "+this.vy);
         
         this.enabled=false
-       
+
+        this.joc=joc;  
+        this.color="#fff";   
     };
 
     draw(ctx) {
@@ -17,11 +19,6 @@ class Bola {
         ctx.arc(this.posicio.x, this.posicio.y, this.radi, 0,2*Math.PI);
         ctx.fill();
         ctx.closePath();
-    }
-
-    reset(){
-        console.log("new pos")
-        this.posicio=this.posicio_principal;
     }
 
     mou(x,y){
@@ -72,6 +69,7 @@ class Bola {
             //Xocs amb totxos
             
             for(let i=joc.totxos.length-1; i>=0; --i){
+                console.log(1);
                 let xocTotxo = this.interseccioSegmentRectangle(trajectoria, {
                     posicio: {x: joc.totxos[i].posicio.x - this.radi, y: joc.totxos[i].posicio.y - this.radi},
                     amplada: joc.totxos[i].amplada + 2 * this.radi,
@@ -155,8 +153,7 @@ class Bola {
             // Interpretació del xoc
             if(xoc){ //(!xoc && this.enabled)
                 this.update()
-            }
-            else if(xoc_inferior){
+            }else if(xoc_inferior){
                 this.posicio =new Punt(this.posicio_principal.x, this.posicio_principal.y);
                 this.enabled=false;
                 this.vx=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
@@ -167,6 +164,10 @@ class Bola {
                 this.posicio.x = trajectoria.puntB.x;
                 this.posicio.y = trajectoria.puntB.y;
             }
+            
+        } else {
+            this.posicio.x=150;
+            this.posicio.y=100;
         }
     
     }
