@@ -67,4 +67,3 @@ Ideas de extras que es poden fer:
 
 pala :
 h=2.5%*total_h; w=h*2/3;
-

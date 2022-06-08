@@ -1,8 +1,5 @@
 $(document).ready(function() {
-    h=window.innerHeight*0.9;
-    w=h*2/3;
-    console.log(h,w);
-    $("#principal").html("<canvas id=\"joc\" width=\""+w+"px\" height=\""+h+"px\" ></canvas> ")
+    spawnCanvas();
 
     let myCanvas=document.getElementById("joc");
     let ctx=myCanvas.getContext("2d");
@@ -15,4 +12,14 @@ $(document).ready(function() {
 function animacio() {
     joc.update();
     requestAnimationFrame(animacio);
+}
+function spawnCanvas(){
+    h=parseInt(window.innerHeight*0.5); 
+    w=parseInt(h*2/3);
+    $("#joc-holder").html("<canvas id=\"joc\" width=\""+w+"px\" height=\""+h+"px\" ></canvas> ");
+    $("#principal").css({
+        // "height":(h+parseInt($("#principal").css("border-width"))*2) +"px",
+        "width":(w+parseInt($("#principal").css("border-width"))*2) +"px"
+    });
+
 }

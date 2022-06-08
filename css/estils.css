@@ -8,21 +8,19 @@ body {
 }
 
 #principal{
-	width: 100%;
 	text-align: center;
+	border-color: white;
+	border-width: 10px;
+	border-style:solid;
+	margin: auto auto;
 }
 
-#principal h1 {
-	margin: 10px;
-}
 
 #joc{
 	position:relative;
-	/* width: 90%; */
 	background: black; 
-	border: white solid 5px;
 	display: block; 
-	margin: 0 auto;
+	margin: auto auto;
 }
 #inici, #fi{
 	position:absolute;
@@ -42,10 +40,9 @@ body {
 }
 #game {
 	background-color: black;  /* color gris clar  */
-	border: white 50px solid;
+	
 	border-bottom-width: 0;
 	display: block;
-	margin: 0 auto;
 }
 
 #capçalera{

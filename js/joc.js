@@ -7,17 +7,17 @@ class Joc{
         this.amplada = canvas.width;
         this.alcada = canvas.height;
 
-
-        this.totxoamplada = 55;
         this.totxoalcada = 10;
 
-        // this.bola=new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3);
-        this.boles=[new Bola(new Punt(this.canvas.width/2,2*this.canvas.height/3),3)];
+        this.pala_alcada=this.alcada*0.025;
+        this.pala_amplada=this.pala_alcada*3;
 
-        // this.pala=new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-15),60,4);
-        this.pales = [new Pala(new Punt((this.canvas.width-60)/2,this.canvas.height-40),30,4)];
+        // this.bola=new Bola(new Punt(this.amplada/2,2*this.alcada/3),3);
+        this.boles=[new Bola(new Punt(this.amplada/2,2*this.alcada/3),3)];
+
+        this.pales = [new Pala(new Punt((this.amplada-this.pala_amplada)/2,this.alcada-40),this.pala_amplada,this.pala_alcada)];
         
-        this.mur=new Mur(this.levels[0],this.amplada,this.alcada/2,this.totxoamplada,this.totxoalcada);
+        this.mur=new Mur(this.levels[0],this.amplada,this.alcada/2,this.totxoalcada);
         this.totxos=this.mur.generate_totxos()
 
         this.key={
@@ -41,7 +41,7 @@ class Joc{
         });
     }
     clearCanvas(){
-        this.ctx.clearRect(0,0,this.canvas.width, this.canvas.height)
+        this.ctx.clearRect(0,0,this.amplada, this.alcada)
     }
 
     inicialitza(){
@@ -98,11 +98,14 @@ class Joc{
             {
                 color:"#f00",
                 pos:[
-                    "rrrrr",
-                    "ggggg",
-                    "bbbbb",
-                    "ooooo",
-                    "uuuuu"
+                    "rrrrrrrrr",
+                    "rrrrrrrrr",
+                    "ooooooooo",
+                    "ooooooooo",
+                    "ggggggggg",
+                    "ggggggggg",
+                    "yyyyyyyyy",
+                    "yyyyyyyyy"
                 ],
             },
             {
