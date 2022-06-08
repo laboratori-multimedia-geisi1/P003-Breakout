@@ -1,10 +1,21 @@
+@font-face {
+    font-family: 'Atari-Font-Full-Version';
+    src:url('font/Atari-Font-Full-Version.ttf.woff') format('woff'),
+        url('font/Atari-Font-Full-Version.ttf.svg#Atari-Font-Full-Version') format('svg'),
+        url('font/Atari-Font-Full-Version.ttf.eot'),
+        url('font/Atari-Font-Full-Version.ttf.eot?#iefix') format('embedded-opentype'); 
+}
+
+
 * { 
 	padding: 0; margin: 0; 
 	box-sizing: border-box;
+	font-family: 'Atari-Font-Full-Version';
 }
 
 body {
 	background-color: black;
+	color:white;
 }
 
 #principal{

@@ -13,11 +13,11 @@ class Joc{
         this.pala_amplada=this.pala_alcada*3;
 
         // this.bola=new Bola(new Punt(this.amplada/2,2*this.alcada/3),3);
-        this.boles=[new Bola(new Punt(this.amplada/2,2*this.alcada/3),3)];
+        this.boles=[new Bola(new Punt(this.amplada/2,2*this.alcada/3),6)];
 
         this.pales = [new Pala(new Punt((this.amplada-this.pala_amplada)/2,this.alcada-40),this.pala_amplada,this.pala_alcada)];
         
-        this.mur=new Mur(this.levels[0],this.amplada,this.alcada/2,this.totxoalcada);
+        this.mur=new Mur(this.levels[0],this.amplada,0,this.totxoalcada);
         this.totxos=this.mur.generate_totxos()
 
         this.key={
