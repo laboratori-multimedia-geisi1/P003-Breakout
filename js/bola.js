@@ -3,12 +3,9 @@ class Bola {
         this.radi=radi;
         this.posicio_inicial=new Punt(puntPosicio.x, puntPosicio.y);
 
-        this.posicio=new Punt(puntPosicio.x, puntPosicio.y);
-        this.vx=1+Math.random()*3;
-        this.vy=1+Math.random()*2;
-        console.log("vx: "+this.vx+" vy: "+this.vy);
-        
         this.enabled=false
+        this.posicio=new Punt(puntPosicio.x, puntPosicio.y); // punt x ha de ser random.
+        this.generarRandVel();
 
         this.joc=joc;  
         this.color="#fff";   
@@ -27,7 +24,7 @@ class Bola {
         this.posicio.y += y;
     }
     update(){
-        if(this.enabled){
+        if(this.enabled){ // !joc.game_over
             let puntActual=this.posicio;
             let puntSeguent=new Punt(this.posicio.x+this.vx,this.posicio.y+this.vy);
             let trajectoria=new Segment(puntActual, puntSeguent);
@@ -37,9 +34,10 @@ class Bola {
 
             // START Xoc amb les cantonades del canvas
             if(trajectoria.puntB.y + this.radi > joc.alcada){
-                //FALTA: restar 1 al contador de vides
+
                 xoc_inferior=true;
             }
+
             if(trajectoria.puntB.y - this.radi < 0){
                 exces= (trajectoria.puntB.y - this.radi)/this.vy;
                 this.posicio.x = trajectoria.puntB.x - exces*this.vx;
@@ -68,9 +66,7 @@ class Bola {
 
 
             //Xocs amb totxos
-            
             for(let i=joc.totxos.length-1; i>=0; --i){
-                console.log(1);
                 let xocTotxo = this.interseccioSegmentRectangle(trajectoria, {
                     posicio: {x: joc.totxos[i].posicio.x - this.radi, y: joc.totxos[i].posicio.y - this.radi},
                     amplada: joc.totxos[i].amplada + 2 * this.radi,
@@ -92,10 +88,12 @@ class Bola {
                             break;
                     }
                     
+                    joc.punts+=5; // cada color == els seus punts.
                     joc.totxos.splice(i, 1);
                 }
             }
             // END
+
 
             //Xocs amb pales
             for(let i=joc.pales.length-1; i>=0; --i){
@@ -121,7 +119,6 @@ class Bola {
                     }
                 }
             }
-
             // END
 
             // Xocs amb boles
@@ -152,21 +149,24 @@ class Bola {
             // END
 
             // Interpretació del xoc
-            if(xoc){ //(!xoc && this.enabled)
-                this.update()
-            }else if(xoc_inferior){
-                this.posicio =new Punt(this.posicio_inicial.x, this.posicio_inicial.y);
+            // if(xoc){
+            //     this.update();
+            // else
+            if(xoc_inferior ){
+                joc.vides-=1;
+                this.generarRandVel();
                 this.enabled=false;
-                this.vx=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
-                this.vy=Math.random()*10 -5; //en teoria: numero aletaro entre -5 i 5
-                console.log("vx: "+this.vx+" vy: "+this.vy);
-            }
-            else {
+                
+                this.posicio=new Punt(this.posicio_inicial.x, this.posicio_inicial.y);
+                
+                console.log("xoc inferior")
+            } else if (!xoc) {
                 this.posicio.x = trajectoria.puntB.x;
                 this.posicio.y = trajectoria.puntB.y;
             }
             
-        } else {
+        }else{
+            // agafar posicio x random. (0 o width)
             this.posicio.x=this.posicio_inicial.x;
             this.posicio.y=this.posicio_inicial.y;
         }
@@ -276,5 +276,14 @@ class Bola {
             return {pI: puntIMin, vora: voraI};
         }
     }
+
+
+    generarRandVel(){
+        this.vx=1+Math.random()*3;
+        this.vy=1+Math.random()*2;
+        console.log("vx: "+this.vx+" vy: "+this.vy);
+    }
+
+    
 }
 

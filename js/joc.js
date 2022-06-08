@@ -2,22 +2,13 @@ class Joc{
     constructor(canvas,ctx) {
         this.levels();
 
-        this.canvas = canvas;
-        this.ctx = ctx;
-        this.amplada = canvas.width;
-        this.alcada = canvas.height;
+        this.canvas=canvas; this.ctx=ctx;
 
-        this.totxoalcada = 10;
+        this.vides=3; this.punts=0;
+        this.game_over=true;
 
-        this.pala_alcada=this.alcada*0.025;
-        this.pala_amplada=this.pala_alcada*3;
-
-        // this.bola=new Bola(new Punt(this.amplada/2,2*this.alcada/3),3);
-        this.boles=[new Bola(new Punt(this.amplada/2,2*this.alcada/3),6)];
-
-        this.pales = [new Pala(new Punt((this.amplada-this.pala_amplada)/2,this.alcada-40),this.pala_amplada,this.pala_alcada)];
-        
-        this.mur=new Mur(this.levels[0],this.amplada,0,this.totxoalcada);
+        this.mides();
+        this.spawn_elements();
         this.totxos=this.mur.generate_totxos()
 
         this.key={
@@ -28,26 +19,7 @@ class Joc{
         };
     }
 
-    draw(){
-        this.clearCanvas();
-        this.pales.forEach(pala => {
-            pala.draw(this.ctx);
-        });
-        this.boles.forEach(bola => {
-            bola.draw(this.ctx);
-        });
-        this.totxos.forEach(totxo => {
-            totxo.draw(this.ctx)
-        });
-    }
-    clearCanvas(){
-        this.ctx.clearRect(0,0,this.amplada, this.alcada)
-    }
-
     inicialitza(){
-        this.pales.forEach(pala => {
-           pala.draw(this.ctx)
-        });
         $(document).on("keydown",{joc:this}, function(e){
             switch(e.keyCode){
                 case e.data.joc.key.LEFT.code:
@@ -57,9 +29,7 @@ class Joc{
                     e.data.joc.key.RIGHT.pressed=true;
                     break;
                 case e.data.joc.key.SPACE.code:
-                    e.data.joc.boles.forEach(bola => {
-                        bola.enabled=true;
-                    });
+                    e.data.joc.start_game();
                     break;
             }
         });
@@ -78,25 +48,44 @@ class Joc{
         requestAnimationFrame(animacio);
     }
 
-    update(){
+    draw(){
+        this.clearCanvas();
+
         this.pales.forEach(pala => {
-            pala.update(this.ctx);
+            pala.draw(this.ctx);
         });
+
         this.boles.forEach(bola => {
-            bola.update(this.ctx);
+            if (bola.enabled) {
+                bola.draw(this.ctx);
+            } 
         });
-
-        this.totxos.forEach(element => {
-            element.draw(this.ctx)
+        this.totxos.forEach(totxo => {
+            totxo.draw(this.ctx)
         });
-
-        this.draw();
     }
 
-    levels(){        
+    clearCanvas(){
+        this.ctx.clearRect(0,0,this.amplada, this.alcada)
+    }
+
+    update(){
+        if(!this.game_over){
+            Display.hideStartScreen();
+        } else {
+            Display.showStartScreen();
+        }
+        this.update_elements();
+        this.draw();
+
+        Display.updatePunts(this.punts);
+        Display.updateVides(this.vides);
+    }
+
+    levels(){ 
         this.levels=[
             {
-                color:"#f00",
+                color:null,
                 pos:[
                     "rrrrrrrrr",
                     "rrrrrrrrr",
@@ -139,5 +128,69 @@ class Joc{
                 ],
             }
         ]
+    }
+
+
+    // custom functs
+
+    mides() {
+        this.amplada=this.canvas.width;
+        this.alcada=this.canvas.height;
+
+        this.totxoalcada=10;
+
+        this.pala_alcada=this.alcada*0.025;
+        this.pala_amplada=this.pala_alcada*3;
+
+        this.radi_bola=4;
+    }
+
+    spawn_elements(){
+        this.boles=[
+            new Bola(
+                new Punt(
+                    this.amplada/2,
+                    2*this.alcada/3
+                ),
+                this.radi_bola
+            )
+        ];
+        this.pales = [
+            new Pala(
+                new Punt(
+                    (this.amplada-this.pala_amplada)/2, 
+                    this.alcada-40
+                ),
+                this.pala_amplada,
+                this.pala_alcada
+            )
+        ];
+        this.mur=new Mur(
+            this.levels[0],
+            this.amplada,
+            this.alcada/3,
+            this.totxoalcada
+        );
+    }
+
+    update_elements(){
+        this.pales.forEach(pala => {
+            pala.update(this.ctx);
+        });
+        this.boles.forEach(bola => {
+            bola.update(this.ctx);
+        });
+
+        this.totxos.forEach(totxo => {
+            totxo.draw(this.ctx)
+        });
+    }
+
+    start_game(){
+        this.game_over=false;
+
+        this.boles.forEach(bola => {
+            bola.enabled=true;
+        });
     }
 }

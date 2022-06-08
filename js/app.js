@@ -18,7 +18,7 @@ function spawnCanvas(){
     w=parseInt(h/1.2);
     $("#joc-holder").html("<canvas id=\"joc\" width=\""+w+"px\" height=\""+h+"px\" ></canvas> ");
     $("#principal").css({
-        // "height":(h+parseInt($("#principal").css("border-width"))*2) +"px",
+        "height":(h+parseInt($("#principal").css("border-width"))*2) +"px",
         "width":(w+parseInt($("#principal").css("border-width"))*2) +"px"
     });
 
