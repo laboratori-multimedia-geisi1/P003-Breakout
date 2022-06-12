@@ -4,7 +4,8 @@ class Joc{
 
         this.canvas=canvas; this.ctx=ctx;
         this.vides=4; this.punts=0;
-        this.game_over=false; this.start=true;
+        this.game_over=false; 
+        this.start=true;
 
         this.mides();
         this.spawn_elements();
@@ -29,6 +30,7 @@ class Joc{
                     break;
                 case e.data.joc.key.SPACE.code:
                     e.data.joc.start_game();
+                    // si sesta jugant, fer un "reset"
                     break;
             }
         });
@@ -71,7 +73,6 @@ class Joc{
     update(){
         this.check_game();
 
-
         if(this.start){
             Display.showScreen("#start");
         }else {
@@ -84,9 +85,6 @@ class Joc{
         }
         this.update_elements();
         this.draw();
-
-        // Display.updatePunts(this.punts);
-        // Display.updateVides(this.vides);
     }
 
     levels(){ 
@@ -152,6 +150,7 @@ class Joc{
         this.radi_bola=6;
     }
 
+
     spawn_elements(){
         this.boles=[
             new Bola(
@@ -159,7 +158,8 @@ class Joc{
                     this.amplada/2,
                     2*this.alcada/3
                 ),
-                this.radi_bola
+                this.radi_bola,
+                this
             )
         ];
         this.pales = [
@@ -193,17 +193,18 @@ class Joc{
         });
     }
 
-    start_game(){
-        this.game_over=false; this.start=false
-        this.vides=4;
-        Display.updateVides(this.vides);
-        
-        this.punts=0;
-        Display.updatePunts(this.punts);
+    reset_game(){
+        // per fer ...
+    }
 
+    start_game(){
         this.boles.forEach(bola => {
             bola.enabled=true;
         });
+        this.game_over=false; this.start=false
+        this.vides=4; Display.updateVides(this.vides);
+        this.punts=0; Display.updatePunts(this.punts);
+        this.totxos=this.mur.generate_totxos();
     }
 
     check_game(){

@@ -25,13 +25,12 @@ function animacio() {
     requestAnimationFrame(animacio);
 }
 function spawnCanvas(){
-    h=parseInt(window.innerHeight*0.5); 
+    // aquest tamany semble tenir menys errors.
+    h=371; // parseInt(window.innerHeight*0.5); 
     w=parseInt(h/1.2);
     $("#joc-holder").html("<canvas id=\"joc\" width=\""+w+"px\" height=\""+h+"px\" ></canvas> ");
     $("#principal").css({
-        "height":(h+parseInt($("#principal").css("border-width"))*2) +"px",
-        "width":(w+parseInt($("#principal").css("border-width"))*2) +"px"
+        "height": (h+parseInt($("#principal").css("border-width"))*2) +"px",
+        "width":  (w+parseInt($("#principal").css("border-width"))*2) +"px"
     });
-
-
 }

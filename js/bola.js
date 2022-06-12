@@ -1,13 +1,17 @@
 class Bola {
     constructor(puntPosicio, radi, joc) {
+        this.joc=joc;  
+        this.color="#fff";
+
         this.radi=radi;
         this.posicio_inicial=new Punt(puntPosicio.x, puntPosicio.y);
+
+        this.coordsX=[0, joc.amplada];
 
         this.enabled=false
         this.generarRandStart();
 
-        this.joc=joc;  
-        this.color="#fff";   
+        
     };
 
     draw(ctx) {
@@ -163,7 +167,6 @@ class Bola {
             if(xoc_inferior){
                 this.restaVida();
                 if (joc.vides==0){
-                    this.game_over=true
                     this.enabled=false;
                 }
             } else {
@@ -174,8 +177,8 @@ class Bola {
             }
             
         }else{
-            this.posicio.x=this.posicio_inicial.x;
-            this.posicio.y=this.posicio_inicial.y;
+            if(!this.coordsX.includes(this.posicio.x)) 
+                this.posicio_rand();
         }
     
     }
@@ -286,11 +289,12 @@ class Bola {
 
 
     posicio_rand(){
-        let posicio_x=[0, this.amplada]
         this.posicio=new Punt(
-            posicio_x[Math.floor(Math.random()*2)],
+            this.coordsX[Math.floor(Math.random()*2)],
             this.posicio_inicial.y
         );
+            
+        console.log("posicio rand", this.posicio.x)
     }
 
     generarRandStart(){
@@ -307,9 +311,9 @@ class Bola {
 
         Display.updateVides(joc.vides);
         
-        $("#joc").css("border-color","#9e1e0f");
+        $("#principal").css("border-color","#9e1e0f");
         setTimeout(function(){
-            $("#joc").css("border-color","white");
+            $("#principal").css("border-color","white");
             console.log("changed!")
         }, 100);
     }

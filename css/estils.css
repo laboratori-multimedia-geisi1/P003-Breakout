@@ -59,14 +59,14 @@ body {
 	top:0;
 }
 
-#menu {
+#dades {
 	top:0;
 	left:0;
 	display: inline;
 	width: 100%;
 }
 
-#menu span {
+#dades span {
 	margin:5px;
 }
 #start, #game_over {
