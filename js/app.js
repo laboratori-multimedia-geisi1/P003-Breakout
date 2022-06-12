@@ -1,12 +1,23 @@
+$.fn.flashUnlimited=function(){
+    $(this).fadeTo(700,0.1,function(){
+        $(this).fadeTo(500,1, $(this).flashUnlimited); 
+    });
+}
+
 $(document).ready(function() {
+    $("#jugar").flashUnlimited();
+
     spawnCanvas();
-
-    let myCanvas=document.getElementById("joc");
-    let ctx=myCanvas.getContext("2d");
-
-    joc = new Joc(myCanvas,ctx);
-    joc.velocitat=1;
-    joc.inicialitza();
+    
+    $("#jugar").on("click",function(){
+        $("#init").hide(); $("#principal").show();
+        
+        let myCanvas=document.getElementById("joc");
+        let ctx=myCanvas.getContext("2d");
+        joc=new Joc(myCanvas,ctx);
+        joc.velocitat=1;
+        joc.inicialitza();
+    });
 });
 
 function animacio() {
@@ -21,5 +32,6 @@ function spawnCanvas(){
         "height":(h+parseInt($("#principal").css("border-width"))*2) +"px",
         "width":(w+parseInt($("#principal").css("border-width"))*2) +"px"
     });
+
 
 }

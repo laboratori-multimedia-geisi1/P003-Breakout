@@ -12,6 +12,7 @@ class Totxo{
     draw(ctx) {
         ctx.save();
         ctx.fillStyle = this.color;
+        ctx.beginPath();
         ctx.fillRect(this.posicio.x, this.posicio.y, this.amplada, this.alcada);
         ctx.restore();
 

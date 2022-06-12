@@ -70,7 +70,6 @@ class Joc{
 
     update(){
         this.check_game();
-        console.log(this.game_over);
 
 
         if(this.start){
@@ -150,7 +149,7 @@ class Joc{
         this.pala_alcada=this.alcada*0.025;
         this.pala_amplada=this.pala_alcada*3;
 
-        this.radi_bola=4;
+        this.radi_bola=6;
     }
 
     spawn_elements(){
@@ -197,6 +196,10 @@ class Joc{
     start_game(){
         this.game_over=false; this.start=false
         this.vides=4;
+        Display.updateVides(this.vides);
+        
+        this.punts=0;
+        Display.updatePunts(this.punts);
 
         this.boles.forEach(bola => {
             bola.enabled=true;

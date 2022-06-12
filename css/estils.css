@@ -1,22 +1,41 @@
-@font-face {
+/* @font-face {
     font-family: 'Atari-Font-Full-Version';
-    src:url('font/Atari-Font-Full-Version.ttf.woff') format('woff'),
-        url('font/Atari-Font-Full-Version.ttf.svg#Atari-Font-Full-Version') format('svg'),
-        url('font/Atari-Font-Full-Version.ttf.eot'),
-        url('font/Atari-Font-Full-Version.ttf.eot?#iefix') format('embedded-opentype'); 
+    src:url('font/atari/Atari-Font-Full-Version.ttf.woff') format('woff'),
+        url('font/atari/Atari-Font-Full-Version.ttf.svg#Atari-Font-Full-Version') format('svg'),
+        url('font/atari/Atari-Font-Full-Version.ttf.eot'),
+        url('font/atari/Atari-Font-Full-Version.ttf.eot?#iefix') format('embedded-opentype'); 
+} */
+
+
+@font-face {
+    font-family: "C64 User Mono";
+    src: url("font/c64/C64_Pro_Mono-STYLE.eot");
 }
 
+@font-face {
+    font-family: "C64 User Mono";
+    src: url("font/c64/C64_Pro_Mono-STYLE.ttf") format("truetype"), url("font/c64/C64_Pro_Mono-STYLE.woff") format("woff");
+}
+
+
+html, body {
+	min-height: 100vh;
+}
 
 * { 
 	padding: 0; margin: 0; 
 	box-sizing: border-box;
-	font-family: 'Atari-Font-Full-Version';
 	user-select: none;
+	/* font-family: 'Atari-Font-Full-Version'; */
+	font-family: "C64 User Mono";
 }
 
 body {
 	background-color: black;
 	color:white;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 #principal{
@@ -25,7 +44,6 @@ body {
 	border-color: white;
 	border-width: 10px;
 	border-style:solid;
-	margin: auto auto;
 }
 
 
@@ -78,7 +96,6 @@ body {
 
 #game {
 	background-color: black; 
-	
 	border-bottom-width: 0;
 	display: block;
 }
@@ -86,7 +103,7 @@ body {
 #capçalera{
 	font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 	font-size: 1.2em;
-	background-color:#A3A352;  /* rgb(163,163,82) */
+	background-color:#A3A352;
 	height: 200px;
 	border-radius:25px;
 }
@@ -103,4 +120,28 @@ body {
 
 .right {
 	float: right !important;
+}
+
+#init {
+	text-align: center;
+}
+
+#init p {
+	margin-top:10px;
+	color: #ccc;
+	font-size: smaller;
+	font-weight: lighter;
+}
+#init #jugar {
+	margin-top:20px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+#animated_title {
+	background-image: url("../img/animation.gif");
+	background-repeat: repeat;
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	font-size: 70px;
 }

@@ -13,6 +13,7 @@ class Bola {
     draw(ctx) {
         ctx.beginPath();
         ctx.fillStyle = this.color;
+        ctx.beginPath();
         ctx.arc(this.posicio.x, this.posicio.y, this.radi, 0,2*Math.PI);
         ctx.fill();
         ctx.closePath();
@@ -306,9 +307,9 @@ class Bola {
 
         Display.updateVides(joc.vides);
         
-        $("#principal").css("border-color","#9e1e0f");
+        $("#joc").css("border-color","#9e1e0f");
         setTimeout(function(){
-            $("#principal").css("border-color","white");
+            $("#joc").css("border-color","white");
             console.log("changed!")
         }, 100);
     }
