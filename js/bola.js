@@ -4,8 +4,7 @@ class Bola {
         this.posicio_inicial=new Punt(puntPosicio.x, puntPosicio.y);
 
         this.enabled=false
-        this.posicio=new Punt(puntPosicio.x, puntPosicio.y); // punt x ha de ser random.
-        this.generarRandVel();
+        this.generarRandStart();
 
         this.joc=joc;  
         this.color="#fff";   
@@ -35,6 +34,12 @@ class Bola {
             // START Xoc amb les cantonades del canvas
             if(trajectoria.puntB.y + this.radi > joc.alcada){
 
+                exces=(trajectoria.puntB.y + this.radi - joc.alcada)/this.vy;
+                this.posicio.x=trajectoria.puntB.x - exces*this.vx;
+                this.posicio.y=joc.alcada - this.radi;
+                xoc=true;
+                this.vy=-this.vy;
+                
                 xoc_inferior=true;
             }
 
@@ -89,13 +94,14 @@ class Bola {
                     }
                     
                     joc.punts+=5; // cada color == els seus punts.
+                    Display.updatePunts(joc.punts);
                     joc.totxos.splice(i, 1);
                 }
             }
             // END
 
 
-            //Xocs amb pales
+            //Xocs amb pales --- BUGS
             for(let i=joc.pales.length-1; i>=0; --i){
                 let xocPala = this.interseccioSegmentRectangle(trajectoria, {
                     posicio: {x: joc.pales[i].posicio.x - this.radi, y: joc.pales[i].posicio.y - this.radi},
@@ -150,23 +156,23 @@ class Bola {
 
             // Interpretació del xoc
             // if(xoc){
-            //     this.update();
-            // else
-            if(xoc_inferior ){
-                joc.vides-=1;
-                this.generarRandVel();
-                this.enabled=false;
-                
-                this.posicio=new Punt(this.posicio_inicial.x, this.posicio_inicial.y);
-                
-                console.log("xoc inferior")
-            } else if (!xoc) {
-                this.posicio.x = trajectoria.puntB.x;
-                this.posicio.y = trajectoria.puntB.y;
+            //     this.update(); // necessari?
+            // } else 
+            
+            if(xoc_inferior){
+                this.restaVida();
+                if (joc.vides==0){
+                    this.game_over=true
+                    this.enabled=false;
+                }
+            } else {
+                if (!xoc) {
+                    this.posicio.x = trajectoria.puntB.x;
+                    this.posicio.y = trajectoria.puntB.y;
+                }
             }
             
         }else{
-            // agafar posicio x random. (0 o width)
             this.posicio.x=this.posicio_inicial.x;
             this.posicio.y=this.posicio_inicial.y;
         }
@@ -278,12 +284,35 @@ class Bola {
     }
 
 
-    generarRandVel(){
+    posicio_rand(){
+        let posicio_x=[0, this.amplada]
+        this.posicio=new Punt(
+            posicio_x[Math.floor(Math.random()*2)],
+            this.posicio_inicial.y
+        );
+    }
+
+    generarRandStart(){
+        
+        this.posicio_rand();
         this.vx=1+Math.random()*3;
         this.vy=1+Math.random()*2;
+
         console.log("vx: "+this.vx+" vy: "+this.vy);
     }
 
-    
+    restaVida(){
+        joc.vides-=1;
+
+        Display.updateVides(joc.vides);
+        
+        $("#principal").css("border-color","#9e1e0f");
+        setTimeout(function(){
+            $("#principal").css("border-color","white");
+            console.log("changed!")
+        }, 100);
+    }
 }
+
+
 

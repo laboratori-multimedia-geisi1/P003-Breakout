@@ -3,9 +3,8 @@ class Joc{
         this.levels();
 
         this.canvas=canvas; this.ctx=ctx;
-
-        this.vides=3; this.punts=0;
-        this.game_over=true;
+        this.vides=4; this.punts=0;
+        this.game_over=false; this.start=true;
 
         this.mides();
         this.spawn_elements();
@@ -70,16 +69,25 @@ class Joc{
     }
 
     update(){
-        if(!this.game_over){
-            Display.hideStartScreen();
-        } else {
-            Display.showStartScreen();
+        this.check_game();
+        console.log(this.game_over);
+
+
+        if(this.start){
+            Display.showScreen("#start");
+        }else {
+            Display.hideScreen("#start");
+            if(!this.game_over){
+                Display.hideScreen("#game_over");
+            }else{
+                Display.showScreen("#game_over");
+            }
         }
         this.update_elements();
         this.draw();
 
-        Display.updatePunts(this.punts);
-        Display.updateVides(this.vides);
+        // Display.updatePunts(this.punts);
+        // Display.updateVides(this.vides);
     }
 
     levels(){ 
@@ -187,10 +195,18 @@ class Joc{
     }
 
     start_game(){
-        this.game_over=false;
+        this.game_over=false; this.start=false
+        this.vides=4;
 
         this.boles.forEach(bola => {
             bola.enabled=true;
+        });
+    }
+
+    check_game(){
+        this.game_over=true;
+        this.boles.forEach(bola => {
+            if (bola.enabled) this.game_over=false;
         });
     }
 }

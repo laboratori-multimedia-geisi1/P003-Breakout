@@ -17,9 +17,7 @@ class Totxo{
 
     }
     puntInteriorRectangle(punt){
-        return (punt.x >= this.posicio.x &&
-            punt.x <= this.posicio.x + this.amplada) &&
-            (punt.y >= this.posicio.y &&
-                punt.y<=this.posicio.y+this.alcada);
+        return (punt.x >= this.posicio.x && punt.x <= this.posicio.x + this.amplada) &&
+                (punt.y >= this.posicio.y && punt.y<=this.posicio.y+this.alcada);
     }
 };

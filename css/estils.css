@@ -51,7 +51,7 @@ body {
 #menu span {
 	margin:5px;
 }
-#start {
+#start, #game_over {
 	width: 100%;
 	text-align: center;
 	top:50%
