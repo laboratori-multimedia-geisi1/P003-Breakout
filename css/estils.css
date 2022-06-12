@@ -132,7 +132,7 @@ body {
 	font-size: smaller;
 	font-weight: lighter;
 }
-#init #jugar {
+#init #game-menu-start, #game-menu button {
 	margin-top:20px;
 	padding: 5px;
 	cursor: pointer;
@@ -144,4 +144,47 @@ body {
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	font-size: 70px;
+}
+
+#game-menu {
+	text-align: center;
+}
+#game-menu table{
+	width: 100%;
+}
+
+#game-menu input {
+	color:white;
+	border: none;
+	border-bottom: white solid 2px;
+	background-color: black;
+	padding: 5px;
+	margin-bottom: 12px;
+
+}
+#game-menu h1, #game-menu h3 {
+	text-align: center;
+	text-decoration: underline;
+}
+
+#game-menu #setup {
+	text-align: left;
+	margin-top:30px;
+	margin-bottom: 40px;
+}
+#game-menu #play {
+	margin-top:30px;
+}
+tr td:nth-last-child(2) {
+	text-align: right;
+}
+
+.elim {
+	color:#d70000;
+	cursor: pointer;
+}
+
+#level-info {
+	margin-top: 10px;
+	text-align: center;
 }

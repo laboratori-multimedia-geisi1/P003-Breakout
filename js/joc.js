@@ -1,10 +1,11 @@
 class Joc{
-    constructor(canvas,ctx) {
+    constructor(canvas,ctx, username) {
         this.levels();
 
         this.canvas=canvas; this.ctx=ctx;
         this.vides=4; this.punts=0;
         this.game_over=false; 
+        this.prev_go=!(this.game_over);
         this.start=true;
 
         this.mides();
@@ -17,6 +18,11 @@ class Joc{
             SPACE:{code:32 },
             R:{code:82 }
         };
+
+        this.username=username;
+        this.setupRecords();
+
+        
     }
 
     inicialitza(){
@@ -73,16 +79,22 @@ class Joc{
     update(){
         this.check_game();
 
-        if(this.start){
-            Display.showScreen("#start");
-        }else {
-            Display.hideScreen("#start");
-            if(!this.game_over){
-                Display.hideScreen("#game_over");
+        if(this.game_over!==this.prev_go){
+            if(this.start){
+                Display.showScreen("#start");
             }else{
-                Display.showScreen("#game_over");
+                Display.hideScreen("#start");
+                if(!this.game_over){
+                    Display.hideScreen("#game_over");
+                }else{
+                    Display.showScreen("#game_over");
+                    this.updateRecord();
+                }
             }
         }
+
+
+        this.prev_go=this.game_over;
         this.update_elements();
         this.draw();
     }
@@ -208,9 +220,49 @@ class Joc{
     }
 
     check_game(){
-        this.game_over=true;
+        let g=true;
         this.boles.forEach(bola => {
-            if (bola.enabled) this.game_over=false;
+            if (bola.enabled) g=false;
         });
+
+        if (g!==this.game_over){
+            this.game_over=g;
+        }
+    }
+
+    setupRecords(){
+        let records=localStorage.getItem("records");
+        this.pr_points=0;
+        if(records){
+            records=JSON.parse(records);
+            let pr=records.map(r=>r.username).indexOf(this.username);
+            this.pr_points=(pr>=0) ? records[pr].points : 0;
+        }
+
+        $("#personal-best").text(this.pr_points+"pts");
+        $("#current-username").text(this.username);
+    }
+
+    updateRecord(){
+        let records=localStorage.getItem("records"),
+            tmp={username:this.username, points:this.punts},
+            u=0;
+
+        if(records){
+            records=JSON.parse(records);
+            let pr=records.map(r=>r.username).indexOf(this.username);
+
+            if(pr>=0) records[pr].points=Math.max(records[pr].points, this.punts);
+            else records.push(tmp);
+            
+            u=(pr<0)?records.length-1:pr;
+        } else {
+            records=[tmp];
+        }
+        this.pr_points=records[u].points;
+        localStorage.setItem("records", JSON.stringify(records));
+        $("#personal-best").text(this.pr_points+"pts");
+
+        console.log("records set", records);
     }
 }

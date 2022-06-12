@@ -65,7 +65,7 @@ class Segment{
         //     // return false;
         //     console.log("a: " + a + " b: " + b + " c: " + c);
         // }
-        return (a < b && b < c) || (c < b && b < a) || Math.abs(a-b) < 0.0001 || Math.abs(b-c) < 0.0001; // || Math.abs(a-b) < 0.000001 || Math.abs(b-c) < 0.000001;
+        return (a < b && b < c) || (c < b && b < a) || Math.abs(a-b) < 0.01 || Math.abs(b-c) < 0.01; // || Math.abs(a-b) < 0.000001 || Math.abs(b-c) < 0.000001;
     }
 }
     

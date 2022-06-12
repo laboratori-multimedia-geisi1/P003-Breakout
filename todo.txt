@@ -1,7 +1,6 @@
 Per fer:
  - menu principal
       Tria de nivell i canvi de nivell per botons 
-
  - reset
  - audios (
       Hi haurà so associat al xoc amb un totxo, xoc amb la raqueta, 
@@ -9,6 +8,7 @@ Per fer:
       El so sempre es podrà desactivar.
    )
  - Detecta el final del mur, passant al següent nivell
+ - al fer record que el num canvii a color daurat durant un moment.
 
  
 (joc.levels) 
@@ -23,17 +23,7 @@ if it's needed, can be used to identify form where to start.
 
 ----------------------------------------------------------------------------------------------------
 
-Al escollir tenir en compte: 
-    el impacte visual
-    dificultat de codi
-    temps q es necesita.
-
-
 Ideas de extras que es poden fer:
-
- - canvas per tota la pantalla
-    menu i titols amb estil pixelejat.
-    basicament com un joc retro
 
  - totxo que dispara:
     aquest hauria de ser un boss level o hauria d'anar al davant de tot
@@ -62,15 +52,11 @@ Ideas de extras que es poden fer:
     Codi: 
     fer el camp mes petit i posar dos pales, una es controla amb les <- -> i l'altre amb A D.
 
- - sistema de records
-    guardar els resultats en ?memoria? (POL: si que es poden guardar en memoria, tenim dos opcions o de forma temporal fins que es tanqui la sessió o es recarregi la pagina o de fomra permanent amb una cookie, crec que no es dificil i hem sembla que ho va explicar a classe)
-    tipo zombies, quantes rondes aguantes. aixo es faria contra un boss o alg aixi
-
  - MOLT OP: 
     estetica de maquina retro (https://youtu.be/AMUv8KvVt08)
 
-
-
-+ al fer record que el num canvii a color daurat durant un moment.
-
 https://codepen.io/gilsjhonny/pen/xqjKzg - es podria copiar.
+
+
+Velocitats amb manys errors:
+vx: 2.2027946807829055 vy: 1.6460407364817553

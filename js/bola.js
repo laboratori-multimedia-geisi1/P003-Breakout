@@ -158,11 +158,6 @@ class Bola {
                 }
             } */
             // END
-
-            // Interpretació del xoc
-            // if(xoc){
-            //     this.update(); // necessari?
-            // } else 
             
             if(xoc_inferior){
                 this.restaVida();
@@ -293,8 +288,6 @@ class Bola {
             this.coordsX[Math.floor(Math.random()*2)],
             this.posicio_inicial.y
         );
-            
-        console.log("posicio rand", this.posicio.x)
     }
 
     generarRandStart(){
@@ -314,7 +307,6 @@ class Bola {
         $("#principal").css("border-color","#9e1e0f");
         setTimeout(function(){
             $("#principal").css("border-color","white");
-            console.log("changed!")
         }, 100);
     }
 }

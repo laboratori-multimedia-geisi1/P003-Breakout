@@ -10,28 +10,54 @@
         <div id="init">
             <h1 id="animated_title">BREAKOUT</h1>
             <p>Breakout es un videojoc maquina recreativa<br>desenvolupat per Atari a l'any 1976.</p>
-            <button id="jugar">START</button>
+            <button id="game-menu-start">START</button>
         </div>
 
-        <div id="game-menu" style="display:none;"></div>
+        <div id="game-menu" style="display:none;">
+            <h1>GAME MENU</h1>
+            <div id="setup">
+                username: <input type="text" name="user" id="user" required><br>
+                difficulty:
+            </div>
+            
+            <div id="records">
+                <h3>Prior records:</h3>
+                <table id="records-table"> </table>
+            </div>
 
-        <div id="principal" style="display:none;">
-            <div id="dades" class="msg">
-                <h1>
-                    <span id="punts" class="left">000</span>
-                    <span id="vides" class="right">004</span>
-                </h1>
+            <div id="level"> </div>
+
+            <button id="play">PLAY</button>
+        </div>
+
+        <div id="principal-holder" style="display:none;">
+            <div id="user-data">
+                <h4>
+                    <span id="current-username">username</span>
+                    <span class="right">
+                        PR:<span id="personal-best">99pts</span>
+                    </span>
+                </h4>
             </div>
-            <div id="joc-holder"> </div>
-            <div id="start" class="msg"><h1>START</h1></div>
-            <div id="game_over" class="msg" style="display:none;">
-                <h1>
-                    GAME OVER
-                </h1>
-                <p>
-                    RESTART?
-                </p>
+            <div id="principal">
+                <div id="dades" class="msg">
+                    <h1>
+                        <span id="punts" class="left">000</span>
+                        <span id="vides" class="right">004</span>
+                    </h1>
+                </div>
+                <div id="joc-holder"> </div>
+                <div id="start" class="msg"><h1>START</h1></div>
+                <div id="game_over" class="msg" style="display:none;">
+                    <h1>
+                        GAME OVER
+                    </h1>
+                    <p>
+                        RESTART?
+                    </p>
+                </div>
             </div>
+            <p id="level-info">LEVEL 1</p>
         </div>
     </body>
 
