@@ -1,10 +1,15 @@
 Per fer:
  - menu principal
- - contador de hp
- - la bola vola a direccio random al principi (rang de 60graus o > ) (FET amb una velociatat aleatoria entre -5 i 5 )
- - fer que la pala reboti la bola (FET)
+      Tria de nivell i canvi de nivell per botons 
+
  - reset
- - missatge principal
+ - audios (
+      Hi haurà so associat al xoc amb un totxo, xoc amb la raqueta, 
+      superació d'un nivell i final de partida amb èxit o no. 
+      El so sempre es podrà desactivar.
+   )
+ - Detecta el final del mur, passant al següent nivell
+
  
 (joc.levels) 
 change the concept of levels.
@@ -65,7 +70,7 @@ Ideas de extras que es poden fer:
     estetica de maquina retro (https://youtu.be/AMUv8KvVt08)
 
 
-pala :
-h=2.5%*total_h; w=h*2/3;
 
-https://github.com/scottschiller/SURVIVOR - loading page
++ al fer record que el num canvii a color daurat durant un moment.
+
+https://codepen.io/gilsjhonny/pen/xqjKzg - es podria copiar.
