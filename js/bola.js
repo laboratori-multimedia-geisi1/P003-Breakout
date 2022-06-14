@@ -110,59 +110,31 @@ class Bola {
             }
             // END
 
+            let xocPala = this.interseccioSegmentRectangle(trajectoria, {
+                posicio: {
+                    x: joc.pala.posicio.x - this.radi, 
+                    y: joc.pala.posicio.y - this.radi
+                },
+                amplada: joc.pala.amplada + 2 * this.radi,
+                alcada: joc.pala.alcada+2*this.radi
+            });
 
-            //Xocs amb pales --- BUGS
-            for(let i=joc.pales.length-1; i>=0; --i){
-                let xocPala = this.interseccioSegmentRectangle(trajectoria, {
-                    posicio: {x: joc.pales[i].posicio.x - this.radi, y: joc.pales[i].posicio.y - this.radi},
-                    amplada: joc.pales[i].amplada + 2 * this.radi,
-                    alcada: joc.pales[i].alcada+2*this.radi
-                });
-
-                if (xocPala){
-                    xoc=true;
-                    this.posicio.x=xocPala.pI.x;
-                    this.posicio.y=xocPala.pI.y;
-                    switch(xocPala.vora){
-                        case "superior":
-                        case "inferior":
-                            this.vy = -this.vy;
-                            break;
-                        case "esquerra":
-                        case"dreta":
-                            this.vx = -this.vx;
-                            break;
-                    }
+            if (xocPala){
+                xoc=true;
+                this.posicio.x=xocPala.pI.x;
+                this.posicio.y=xocPala.pI.y;
+                switch(xocPala.vora){
+                    case "superior":
+                    case "inferior":
+                        this.vy = -this.vy;
+                        break;
+                    case "esquerra":
+                    case"dreta":
+                        this.vx = -this.vx;
+                        break;
                 }
             }
-            // END
-
-            // Xocs amb boles
-            /* de moment inutil
-            for(let i=joc.boles.length-1; i>=0; --i){
-                let xocBola = this.interseccioSegmentRectangle(trajectoria, {
-                    posicio: {x: joc.boles[i].posicio.x - this.radi, y: joc.boles[i].posicio.y - this.radi},
-                    amplada: joc.boles[i].radi*2,
-                    alcada: joc.boles[i].radi*2
-                });
-
-                if (xocBola){
-                    xoc=true;
-                    this.posicio.x=xocBola.pI.x;
-                    this.posicio.y=xocBola.pI.y;
-                    switch(xocBola.vora){
-                        case "superior":
-                        case "inferior":
-                            this.vy = -this.vy;
-                            break;
-                        case "esquerra":
-                        case"dreta":
-                            this.vx = -this.vx;
-                            break;
-                    }
-                }
-            } */
-            // END
+            
             
             if(xoc_inferior){
                 this.restaVida();

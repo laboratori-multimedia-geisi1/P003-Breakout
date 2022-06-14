@@ -15,10 +15,35 @@ $.fn.flashUnlimited=function(){
 }
 
 $(document).ready(function() {
+    
     $("#game-menu-start").flashUnlimited();
 
     $("#game-menu-start").click(function(){
         spawnMenu();
+    });
+    $("td.elim").click(function(){
+        // eliminarRecords(this);
+
+        let parent=$(this).parent(),
+            string_recs=localStorage.getItem("records")
+            records=string_recs,
+            username=parent.find(".player_name").text(),
+            pr=0;
+        
+        console.log(records)
+        if(records){
+            console.log("deleting ",username);
+
+            records=JSON.parse(records);
+            pr=records.map(r=>r.username).indexOf(username);
+            records.splice(pr,1);
+
+            string_recs=JSON.stringify(records);
+            localStorage.setItem("records", string_recs);
+            records2table(string_recs);
+        } else {
+            console.log("no records")
+        }
     });
 
     $(".tria_nivell").click(function(){
@@ -30,11 +55,9 @@ $(document).ready(function() {
         spawnMain();
     });
 
-    $(".elim").click(function(){
-        eliminarRecords(this)
-    });
+    
 
-    $("#sound_val").click(function(e){
+    $("#sound_val").click(function(){
         sound=!sound;
         Display.setSound(sound);
     });
@@ -82,29 +105,28 @@ function records2table(records){
     $("#records-table").html(table);
 }
 
-function eliminarRecords(elem){
-    console.log("delete clicked")
-    let string_recs=localStorage.getItem("records")
-        records=string_recs,
-        parent=$(elem).parent(),
-        username=parent.find(".player_name").text(),
-        pr=0;
+// function eliminarRecords(elem){
+//     let string_recs=localStorage.getItem("records")
+//         records=string_recs,
+//         parent=$(elem).parent(),
+//         username=parent.find(".player_name").text(),
+//         pr=0;
     
-    console.log(records)
-    if(records){
-        console.log("deleting ",username);
+//     console.log(records)
+//     if(records){
+//         console.log("deleting ",username);
 
-        records=JSON.parse(records);
-        pr=records.map(r=>r.username).indexOf(username);
-        records.splice(pr,1);
+//         records=JSON.parse(records);
+//         pr=records.map(r=>r.username).indexOf(username);
+//         records.splice(pr,1);
 
-        string_recs=JSON.stringify(records);
-        localStorage.setItem("records", string_recs);
-        records2table(string_recs);
-    } else {
-        console.log("no records")
-    }
-}
+//         string_recs=JSON.stringify(records);
+//         localStorage.setItem("records", string_recs);
+//         records2table(string_recs);
+//     } else {
+//         console.log("no records")
+//     }
+// }
 
 function spawnMain(){
     $("#go_back").show();
@@ -136,6 +158,7 @@ function spawnMenu(){
     records2table(localStorage.getItem("records"));
         
     $("#init").hide();
+    $("#go_back").hide();
     $("#principal-holder").hide();
     $("#game-menu").show();
     $("#sound").show();

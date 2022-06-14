@@ -64,9 +64,7 @@ class Joc{
     draw(){
         this.clearCanvas();
 
-        this.pales.forEach(pala => {
-            pala.draw(this.ctx);
-        });
+        this.pala.draw(this.ctx);
 
         if(this.bola.enabled) {
             this.bola.draw(this.ctx);
@@ -124,16 +122,14 @@ class Joc{
             this.radi_bola,
             this
         );
-        this.pales = [
-            new Pala(
-                new Punt(
-                    (this.amplada-this.pala_amplada)/2, 
-                    this.alcada-40
-                ),
-                this.pala_amplada,
-                this.pala_alcada
-            )
-        ];
+        this.pala=new Pala(
+            new Punt(
+                (this.amplada-this.pala_amplada)/2, 
+                this.alcada-40
+            ),
+            this.pala_amplada,
+            this.pala_alcada
+        );
         this.mur=new Mur(
             this.amplada,
             this.alcada/3,
@@ -143,9 +139,7 @@ class Joc{
     }
 
     update_elements(){
-        this.pales.forEach(pala => {
-            pala.update(this.ctx);
-        });
+        this.pala.update(this.ctx);
         this.bola.update(this.ctx);
     }
 
