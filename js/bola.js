@@ -15,6 +15,7 @@ class Bola {
     };
 
     draw(ctx) {
+        
         ctx.beginPath();
         ctx.fillStyle = this.color;
         ctx.beginPath();
@@ -28,6 +29,7 @@ class Bola {
         this.posicio.y += y;
     }
     update(){
+        
         if(this.enabled){ // !joc.game_over
             let puntActual=this.posicio;
             let puntSeguent=new Punt(this.posicio.x+this.vx,this.posicio.y+this.vy);
@@ -49,11 +51,14 @@ class Bola {
             }
 
             if(trajectoria.puntB.y - this.radi < 0){
-                exces= (trajectoria.puntB.y - this.radi)/this.vy;
-                this.posicio.x = trajectoria.puntB.x - exces*this.vx;
-                this.posicio.y = this.radi;
-                xoc = true;
-                this.vy = -this.vy;
+                // exces= (trajectoria.puntB.y - this.radi)/this.vy;
+                // this.posicio.x = trajectoria.puntB.x - exces*this.vx;
+                // this.posicio.y = this.radi;
+                // xoc = true;
+                // this.vy = -this.vy;
+                this.posicio_rand();
+                this.joc.nextLevel();
+                console.log("next level");
 
             }
 
@@ -163,6 +168,7 @@ class Bola {
                 this.restaVida();
                 if (joc.vides==0){
                     this.enabled=false;
+                    this.joc.gameOver();
                 }
             } else {
                 if (!xoc) {
@@ -179,7 +185,7 @@ class Bola {
     }
 
     interseccioSegmentRectangle(segment, rectangle){
-
+        
         //REVISAR SI EXISTEIX UN PUNT D'INTERSECCIÓ EN UN DELS 4 SEGMENTS
         //SI EXISTEIX, QUIN ÉS AQUEST PUNT
         //si hi ha més d'un, el més ajustat

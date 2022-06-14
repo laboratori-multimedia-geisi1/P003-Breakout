@@ -16,68 +16,27 @@ $.fn.flashUnlimited=function(){
 
 $(document).ready(function() {
     $("#game-menu-start").flashUnlimited();
-    spawnCanvas();
-
-    // get all records
-    records2table(localStorage.getItem("records"));
-    
 
     $("#game-menu-start").click(function(){
-        $("#init").hide();
-        $("#game-menu").show();
+        spawnMenu();
+    });
+
+    $(".tria_nivell").click(function(){
+        $(".tria_nivell").parent().find("label").removeClass("selected");
+        $(this).parent().find("label").addClass("selected");
     });
 
     $("#play").click(function(){
-        $("#go_back").show();
-
-        let username=$("#user").val();
-        if(username){  
-            let myCanvas=document.getElementById("joc");
-            let ctx=myCanvas.getContext("2d");
-            joc=new Joc(myCanvas,ctx,username);
-            joc.velocitat=1;
-            joc.inicialitza();
-            
-            $("#game-menu").hide(); 
-            $("#principal-holder").show();
-        } else {
-            $("#user").css("border-color", "red");
-            console.log("no username was provided.");
-        }
-
-        $("#go_back>h1").click(function(){
-            $("#go_back").hide();
-            $("#game-menu").show();
-            $("#principal-holder").hide();
-        });
+        spawnMain();
     });
 
     $(".elim").click(function(){
-        console.log("delete clicked")
-        let string_recs=localStorage.getItem("records")
-            records=string_recs,
-            parent=$(this).parent(),
-            username=parent.find(".player_name").text(),
-            pr=0;
-        
-        console.log(records)
-        if(records){
-            console.log("deleting ",username);
-    
-            records=JSON.parse(records);
-            pr=records.map(r=>r.username).indexOf(username);
-            records.splice(pr,1);
-    
-            string_recs=JSON.stringify(records);
-            localStorage.setItem("records", string_recs);
-            records2table(string_recs);
-        } else {
-            console.log("no records")
-        }
+        eliminarRecords(this)
     });
 
     $("#sound_val").click(function(e){
-        
+        sound=!sound;
+        Display.setSound(sound);
     });
 });
 
@@ -121,4 +80,63 @@ function records2table(records){
     }
     
     $("#records-table").html(table);
+}
+
+function eliminarRecords(elem){
+    console.log("delete clicked")
+    let string_recs=localStorage.getItem("records")
+        records=string_recs,
+        parent=$(elem).parent(),
+        username=parent.find(".player_name").text(),
+        pr=0;
+    
+    console.log(records)
+    if(records){
+        console.log("deleting ",username);
+
+        records=JSON.parse(records);
+        pr=records.map(r=>r.username).indexOf(username);
+        records.splice(pr,1);
+
+        string_recs=JSON.stringify(records);
+        localStorage.setItem("records", string_recs);
+        records2table(string_recs);
+    } else {
+        console.log("no records")
+    }
+}
+
+function spawnMain(){
+    $("#go_back").show();
+    $("#go_back").click(function(){
+        spawnMenu()
+    });
+
+    let username=$("#user").val();
+    if(username){  
+        spawnCanvas();
+
+        let myCanvas=document.getElementById("joc");
+        let ctx=myCanvas.getContext("2d");
+        joc=new Joc(myCanvas,ctx);
+        joc.velocitat=1;
+        joc.inicialitza();
+        
+        $("#game-menu").hide(); 
+        $("#principal-holder").show();
+    } else {
+        $("#user").css("border-color", "red");
+        console.log("no username was provided.");
+    }
+
+   
+}
+
+function spawnMenu(){
+    records2table(localStorage.getItem("records"));
+        
+    $("#init").hide();
+    $("#principal-holder").hide();
+    $("#game-menu").show();
+    $("#sound").show();
 }

@@ -7,10 +7,10 @@
 } */
 
 
-@font-face {
+/* @font-face {
     font-family: "C64 User Mono";
     src: url("font/c64/C64_Pro_Mono-STYLE.eot");
-}
+} */
 
 @font-face {
     font-family: "C64 User Mono";
@@ -203,4 +203,39 @@ h1.icon {
 	position: absolute;
 	top:2%;
 	right:1%;
+}
+
+
+
+.level_container{
+	
+}
+
+.tria_nivell {
+	display: none;
+}
+
+.level_container > div, 
+.level_container .input_container div {
+	display: inline;
+}
+
+
+.variant1, .variant2, .variant3 {
+	color:white;
+	cursor: pointer;
+}
+
+.selected {
+	text-decoration: underline;
+}
+
+.selected.variant1 {
+	color:#0a8236;
+}
+.selected.variant2 {
+	color:#c6c633;
+}
+.selected.variant3 {
+	color:#9e1e0f;
 }

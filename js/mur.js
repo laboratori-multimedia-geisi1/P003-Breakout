@@ -9,7 +9,7 @@
 */
 
 class Mur {
-    constructor(level, given_width, given_height, totxo_height){
+    constructor(given_width, given_height, totxo_height){
         this.colors();
         this.level=level;
 
@@ -18,12 +18,15 @@ class Mur {
 
         this.separacio= 5;//totxo_height;        
         this.totxo_height=totxo_height;
-        this.totxo_width=(this.playground_width-(this.level.pos[0].length-1)*this.separacio)/(this.level.pos[0].length)
+        this.totxo_width=null;
     }
 
-    generate_totxos(){
-        let totxos=[];
-        let y_cord=40;
+    generate_totxos(level){
+        this.level=level;
+        this.totxo_width=(this.playground_width-(this.level.pos[0].length-1)*this.separacio)/(this.level.pos[0].length);
+
+        let totxos=[],
+            y_cord=40;
         for(let y=0; y<this.level.pos.length; y++){
             y_cord+=this.separacio;
             let x_cord=-this.separacio;

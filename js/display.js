@@ -44,4 +44,8 @@ class Display {
     static getSound(){
         return $("#sound_val").text()=="🔊";
     }
+
+    static updateLevel(l){
+        $("#level-info span").text(l);
+    }
 }

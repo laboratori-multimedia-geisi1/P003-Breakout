@@ -12,15 +12,33 @@
             <button id="game-menu-start">START</button>
         </div>
 
-        <div id="sound">
+        <div id="sound" style="display:none;">
             <h1 class="icon" id="sound_val">🔊</h1>
         </div>
 
         <div id="game-menu" style="display:none;">
             <h1>GAME MENU</h1>
             <div id="setup">
-                username: <input type="text" name="user" id="user" required><br>
-                difficulty:
+                <div class="level_container">
+                    <div>nivell:</div>
+                    <div class="input_container">
+                        <div>
+                            <input id="variant1" class="tria_nivell" type="radio" name="nivell" value="0" checked>
+                            <label class="variant1 selected" for="variant1">Variant 1</label>
+                        </div>
+                        <div>
+                            <input id="variant2" class="tria_nivell" type="radio" name="nivell" value="1">
+                            <label class="variant2" for="variant2">Variant 2</label>
+                        </div>
+                        <div>
+                            <input id="variant3" class="tria_nivell" type="radio" name="nivell" value="2">
+                            <label class="variant3" for="variant3">Variant 3</label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    username: <input type="text" name="user" id="user" required><br>
+                </div>
             </div>
             
             <div id="records">
@@ -66,7 +84,7 @@
                     </p>
                 </div>
             </div>
-            <p id="level-info">LEVEL 1</p>
+            <p id="level-info">LEVEL <span>1</span></p>
         </div>
     </body>
 

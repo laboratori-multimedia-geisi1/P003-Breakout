@@ -1,16 +1,13 @@
 class Joc{
-    constructor(canvas,ctx, username) {
-        this.levels();
+    constructor(canvas,ctx) {
+        this.levels();      
 
         this.canvas=canvas; this.ctx=ctx;
         this.vides=4; this.punts=0;
         this.game_over=false; 
         this.prev_go=!(this.game_over);
         this.start=true;
-
-        this.mides();
-        this.spawn_elements();
-        this.totxos=this.mur.generate_totxos()
+        this.restart=false;        
 
         this.key={
             LEFT:{code:37,pressed:false},
@@ -19,10 +16,18 @@ class Joc{
             R:{code:82 }
         };
 
-        this.username=username;
+        this.username=$("#user").val();
+        this.starting_level=parseInt($("input[name=nivell]:checked").val());
+        this.level=this.starting_level;
+        console.log("starting level: ",this.level)
+
+        this.mides();
+        this.spawn_elements();
+
         this.setupRecords();
 
-        
+        Display.updatePunts(this.punts)
+        Display.updateVides(this.vides)
     }
 
     inicialitza(){
@@ -35,8 +40,9 @@ class Joc{
                     e.data.joc.key.RIGHT.pressed=true;
                     break;
                 case e.data.joc.key.SPACE.code:
-                    e.data.joc.start_game();
-                    // si sesta jugant, fer un "reset"
+                    if(e.data.joc.start) e.data.joc.start_game();
+                    else e.data.joc.restart_game();
+                    
                     break;
             }
         });
@@ -62,11 +68,9 @@ class Joc{
             pala.draw(this.ctx);
         });
 
-        this.boles.forEach(bola => {
-            if (bola.enabled) {
-                bola.draw(this.ctx);
-            } 
-        });
+        if(this.bola.enabled) {
+            this.bola.draw(this.ctx);
+        }
         this.totxos.forEach(totxo => {
             totxo.draw(this.ctx)
         });
@@ -77,19 +81,16 @@ class Joc{
     }
 
     update(){
-        this.check_game();
-
         if(this.game_over!==this.prev_go){
             if(this.start){
                 Display.showScreen("#start");
+                Display.hideScreen("#game_over");
             }else{
                 Display.hideScreen("#start");
-                if(!this.game_over){
-                    Display.hideScreen("#game_over");
-                }else{
-                    Display.showScreen("#game_over");
-                    this.updateRecord();
-                }
+            }
+
+            if(this.start || this.game_over){
+                this.bola.enabled=false;
             }
         }
 
@@ -97,54 +98,6 @@ class Joc{
         this.prev_go=this.game_over;
         this.update_elements();
         this.draw();
-    }
-
-    levels(){ 
-        this.levels=[
-            {
-                color:null,
-                pos:[
-                    "rrrrrrrrr",
-                    "rrrrrrrrr",
-                    "ooooooooo",
-                    "ooooooooo",
-                    "ggggggggg",
-                    "ggggggggg",
-                    "yyyyyyyyy",
-                    "yyyyyyyyy"
-                ],
-            },
-            {
-                color:"#0f0",
-                pos:[
-                    "  k  ",
-                    " u u ",
-                    "u u u",
-                    "b b b",
-                    " b b "
-                ],
-            },
-            {
-                color:"#00f",
-                pos:[
-                    " ggg ",
-                    "gu ug",
-                    " ggg ",
-                    "yoyoy",
-                    "rrrrr"
-                ],
-            },
-            {
-                color:"#ff0", 
-                pos:[
-                    "y   y",
-                    " o o ",
-                    "  r  ",
-                    " o o ",
-                    "y   y"
-                ],
-            }
-        ]
     }
 
 
@@ -162,18 +115,15 @@ class Joc{
         this.radi_bola=6;
     }
 
-
     spawn_elements(){
-        this.boles=[
-            new Bola(
-                new Punt(
-                    this.amplada/2,
-                    2*this.alcada/3
-                ),
-                this.radi_bola,
-                this
-            )
-        ];
+        this.bola=new Bola(
+            new Punt(
+                this.amplada/2,
+                2*this.alcada/3
+            ),
+            this.radi_bola,
+            this
+        );
         this.pales = [
             new Pala(
                 new Punt(
@@ -185,49 +135,53 @@ class Joc{
             )
         ];
         this.mur=new Mur(
-            this.levels[0],
             this.amplada,
             this.alcada/3,
             this.totxoalcada
         );
+        this.totxos=this.mur.generate_totxos(this.lvls[this.level%this.lvls.length]);
     }
 
     update_elements(){
         this.pales.forEach(pala => {
             pala.update(this.ctx);
         });
-        this.boles.forEach(bola => {
-            bola.update(this.ctx);
-        });
-
-        this.totxos.forEach(totxo => {
-            totxo.draw(this.ctx)
-        });
+        this.bola.update(this.ctx);
     }
 
-    reset_game(){
-        // per fer ...
+    restart_game(){
+        this.restart=true;
+        this.level=this.starting_level;
+        Display.updateLevel(1);
+
+        console.log("restarted")
+        this.game_over=!this.prev_go;
+        this.start=true;
+        
+
+        this.vides=4; 
+        Display.updateVides(this.vides);
+
+        this.punts=0;
+        Display.updatePunts(this.punts);
+
+        this.totxos=this.mur.generate_totxos(this.lvls[this.level%this.lvls.length]);
     }
 
     start_game(){
-        this.boles.forEach(bola => {
-            bola.enabled=true;
-        });
-        this.game_over=false; this.start=false
-        this.vides=4; Display.updateVides(this.vides);
-        this.punts=0; Display.updatePunts(this.punts);
-        this.totxos=this.mur.generate_totxos();
+        this.bola.enabled=true;
+
+        this.game_over=false; 
+        this.start=false;
+        this.restart=false;
+
+        Display.hideScreen("#start");
     }
 
-    check_game(){
-        let g=true;
-        this.boles.forEach(bola => {
-            if (bola.enabled) g=false;
-        });
-
-        if (g!==this.game_over){
-            this.game_over=g;
-        }
+    gameOver(){
+        Display.showScreen("#game_over");
+        this.updateRecord();
+        this.restart_game();
     }
 
     setupRecords(){
@@ -265,4 +219,95 @@ class Joc{
 
         console.log("records set", records);
     }
+
+    nextLevel(){
+        this.spawn_elements();
+
+        this.restart=true;
+        this.start=true;
+        
+        this.level+=1;
+        Display.updateLevel(this.level+1);
+        this.totxos=this.mur.generate_totxos(this.lvls[this.level%this.lvls.length]);
+    }
+
+
+
+    levels(){ 
+        this.lvls=[
+            {
+                color:null,
+                pos:[
+                    "  ",
+                    "  ",
+                    "  "
+                ],
+            },
+            {
+                color:null,
+                pos:[
+                    "rrr",
+                    "ggg",
+                    "bbb"
+                ],
+            },
+            {
+                color:null,
+                pos:[
+                    "uuuu",
+                    "ukku",
+                    "ukku",
+                    "uuuu"
+                ],
+            },
+            {
+                color:null,
+                pos:[
+                    " ggg ",
+                    "gu ug",
+                    " ggg ",
+                    "yoyoy",
+                    "rrrrr"
+                ],
+            },
+            {
+                color:null, 
+                pos:[
+                    "rrrrrrr",
+                    "ry   yr",
+                    "r o o r",
+                    "r  r  r",
+                    "r o o r",
+                    "ry   yr",
+                    "rrrrrrr"
+                ],
+            },
+            {
+                color:null, 
+                pos:[
+                    "rrrrrrr",
+                    "       ",
+                    "ooooooo",
+                    "       ",
+                    "yyyyyyy",
+                    "       ",
+                    "gggggggg"
+                ],
+            },
+            {
+                color:null,
+                pos:[
+                    "rrrrrr",
+                    "rrrrrr",
+                    "oooooo",
+                    "oooooo",
+                    "gggggg",
+                    "gggggg",
+                    "yyyyyy",
+                    "yyyyyy"
+                ],
+            }
+        ]
+    }
+
 }
