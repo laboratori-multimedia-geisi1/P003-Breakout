@@ -159,16 +159,16 @@ class Bola {
     interseccioSegmentRectangle(segment, rectangle){
         
         //REVISAR SI EXISTEIX UN PUNT D'INTERSECCIÓ EN UN DELS 4 SEGMENTS
-        //SI EXISTEIX, QUIN ÉS AQUEST PUNT
-        //si hi ha més d'un, el més ajustat
-        let puntI;
-        let distanciaI;
-        let puntIMin;
-        let distanciaIMin=Infinity;
-        let voraI;
+        //SI EXISTEIX, QUIN ÉS AQUEST PUNT (si hi ha més d'un, el més ajustat)
+        let puntI,
+            distanciaI,
+            puntIMin,
+            distanciaIMin=Infinity,
+            voraI;
 
         //calcular punt d'intersecció amb les 4 vores del rectangle
         //necessitem coneixer els 4 segments del rectangle
+
         //vora superior
         let segmentVoraSuperior = new Segment(
             rectangle.posicio,
@@ -188,14 +188,11 @@ class Bola {
                 rectangle.posicio.y+rectangle.alcada
             )
         );
-
         //vora esquerra
         let segmentVoraEsquerra = new Segment(
             rectangle.posicio,
             new Punt(rectangle.posicio.x , rectangle.posicio.y + rectangle.alcada)
         );
-
-
         //vora dreta
         let segmentVoraDreta = new Segment(
             new Punt(
@@ -208,8 +205,7 @@ class Bola {
             )
         );
 
-      
-     
+
         //vora superior
         puntI = segment.puntInterseccio(segmentVoraSuperior);
         if (puntI){

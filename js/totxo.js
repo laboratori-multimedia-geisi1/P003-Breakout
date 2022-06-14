@@ -5,7 +5,7 @@ class Totxo{
         this.alcada=h;
         this.color=color;
     }
-    get area() {
+    get area() { // ?
         return this.amplada * this.alcada;
     }
     
@@ -17,7 +17,7 @@ class Totxo{
         ctx.restore();
 
     }
-    puntInteriorRectangle(punt){
+    puntInteriorRectangle(punt){ // ??
         return (punt.x >= this.posicio.x && punt.x <= this.posicio.x + this.amplada) &&
                 (punt.y >= this.posicio.y && punt.y<=this.posicio.y+this.alcada);
     }
