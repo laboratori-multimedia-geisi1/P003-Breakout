@@ -1,6 +1,12 @@
+var joc=null,
+    sound=true;
+
+var audios={
+    xoc:new Audio("audio/audio_fail.mp3"),
+}
 
 // localStorage.removeItem("records");
-console.log(localStorage.getItem("records"))
+// console.log(localStorage.getItem("records"))
 
 $.fn.flashUnlimited=function(){
     $(this).fadeTo(700,0.1,function(){
@@ -16,46 +22,65 @@ $(document).ready(function() {
     records2table(localStorage.getItem("records"));
     
 
-    $("#game-menu-start").on("click",function(){
-        $("#init").hide(); $("#game-menu").show();
+    $("#game-menu-start").click(function(){
+        $("#init").hide();
+        $("#game-menu").show();
     });
 
-    $("#play").on("click",function(){
+    $("#play").click(function(){
+        $("#go_back").show();
+
         let username=$("#user").val();
         if(username){  
             let myCanvas=document.getElementById("joc");
             let ctx=myCanvas.getContext("2d");
-            joc=new Joc(myCanvas,ctx, username);
+            joc=new Joc(myCanvas,ctx,username);
             joc.velocitat=1;
             joc.inicialitza();
             
-            $("#game-menu").hide(); $("#principal-holder").show();
+            $("#game-menu").hide(); 
+            $("#principal-holder").show();
         } else {
-            console.log("no username was provided.");
             $("#user").css("border-color", "red");
+            console.log("no username was provided.");
         }
+
+        $("#go_back>h1").click(function(){
+            $("#go_back").hide();
+            $("#game-menu").show();
+            $("#principal-holder").hide();
+        });
     });
 
-    $(".elim").on("click",function(){
+    $(".elim").click(function(){
+        console.log("delete clicked")
         let string_recs=localStorage.getItem("records")
             records=string_recs,
             parent=$(this).parent(),
             username=parent.find(".player_name").text(),
             pr=0;
-            
+        
+        console.log(records)
         if(records){
             console.log("deleting ",username);
-
+    
             records=JSON.parse(records);
             pr=records.map(r=>r.username).indexOf(username);
             records.splice(pr,1);
-
+    
             string_recs=JSON.stringify(records);
             localStorage.setItem("records", string_recs);
             records2table(string_recs);
+        } else {
+            console.log("no records")
         }
     });
+
+    $("#sound_val").click(function(e){
+        
+    });
 });
+
 
 function animacio() {
     joc.update();
@@ -82,15 +107,17 @@ function records2table(records){
         table="<td>---</td>";
     } else {
         records=JSON.parse(records);
-        records.sort((a,b) => b.points-a.points);
-        for (let i=0;i<Math.min(records.length, 3); i++){
-            table+="<tr>";
-            table+="<td>"+(i+1)+".</td>";
-            table+="<td class='player_name'>"+records[i].username+"</td>";
-            table+="<td>"+records[i].points+"pts</td>";
-            table+="<td class='elim'>X</td>";
-            table+="</tr>";
-        }
+        if (records.length>0){
+            records.sort((a,b) => b.points-a.points);
+            for (let i=0;i<Math.min(records.length, 3); i++){
+                table+="<tr>";
+                table+="<td>"+(i+1)+".</td>";
+                table+="<td class='player_name'>"+records[i].username+"</td>";
+                table+="<td>"+records[i].points+"pts</td>";
+                table+="<td class='elim'>X</td>";
+                table+="</tr>";
+            }
+        } else table="<td>---</td>";
     }
     
     $("#records-table").html(table);

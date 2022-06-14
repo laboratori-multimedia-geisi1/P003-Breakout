@@ -58,5 +58,6 @@ Ideas de extras que es poden fer:
 https://codepen.io/gilsjhonny/pen/xqjKzg - es podria copiar.
 
 
-Velocitats amb manys errors:
+Velocitats amb menys errors:
 vx: 2.2027946807829055 vy: 1.6460407364817553
+vx: 1.1007810158182243 vy: 2.410904672172901

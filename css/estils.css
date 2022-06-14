@@ -188,3 +188,19 @@ tr td:nth-last-child(2) {
 	margin-top: 10px;
 	text-align: center;
 }
+
+#go_back {
+	position: absolute;
+	top:2%;
+	left:1%;
+}
+h1.icon {
+	cursor:pointer;
+	font-size: 4.5em;
+}
+
+#sound {
+	position: absolute;
+	top:2%;
+	right:1%;
+}

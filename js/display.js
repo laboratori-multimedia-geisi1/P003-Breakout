@@ -33,4 +33,15 @@ class Display {
             element.fadeOut(speed).fadeIn(speed);
         }
     }
+
+
+    //necesaries?
+    
+    static setSound(v){
+        $("#sound_val").text(v ? "🔊":"🔇");
+    }
+
+    static getSound(){
+        return $("#sound_val").text()=="🔊";
+    }
 }
