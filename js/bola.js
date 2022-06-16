@@ -109,7 +109,9 @@ class Bola {
                             break;
                     }
                     
-                    joc.punts+=5; // cada color == els seus punts.
+                    if(joc.punts<=995) joc.punts+=totxos[i].punts;
+                    else joc.punts=999;
+
                     Display.updatePunts(joc.punts);
                     joc.totxos.splice(i, 1);
 
