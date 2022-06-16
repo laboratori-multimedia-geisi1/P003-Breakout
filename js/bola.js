@@ -109,7 +109,7 @@ class Bola {
                             break;
                     }
                     
-                    if(joc.punts<=995) joc.punts+=totxos[i].punts;
+                    if(joc.punts<=995) joc.punts+=joc.totxos[i].punts;
                     else joc.punts=999;
 
                     Display.updatePunts(joc.punts);
@@ -282,8 +282,8 @@ class Bola {
     generarRandStart(){
         
         this.posicio_rand();
-        this.vx=1+Math.random()*3;
-        this.vy=1+Math.random()*2;
+        this.vx=2.2027946807829055;//1+Math.random()*3;
+        this.vy=1.6460407364817553;//1+Math.random()*2;
 
         console.log("vx: "+this.vx+" vy: "+this.vy);
     }
