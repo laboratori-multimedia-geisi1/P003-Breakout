@@ -34,16 +34,11 @@ class Display {
         }
     }
 
-
-    //necesaries?
-    
     static setSound(v){
-        $("#sound_val").text(v ? "🔊":"🔇");
+        // $("#sound_val").text(v ? "🔊":"🔇");
+        $("#sound_val img").attr("src",v ? "img/sound_on.png":"img/sound_off.png");
     }
 
-    static getSound(){
-        return $("#sound_val").text()=="🔊";
-    }
 
     static updateLevel(l){
         $("#level-info span").text(l);

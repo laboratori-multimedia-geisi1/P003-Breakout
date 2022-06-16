@@ -239,3 +239,7 @@ h1.icon {
 .selected.variant3 {
 	color:#9e1e0f;
 }
+
+#sound_val {
+	margin:10px;
+}
