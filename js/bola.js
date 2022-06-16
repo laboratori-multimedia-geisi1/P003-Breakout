@@ -9,9 +9,7 @@ class Bola {
         this.coordsX=[0, joc.amplada];
 
         this.enabled=false
-        this.generarRandStart();
-
-        
+        this.generarRandStart(); 
     };
 
     draw(ctx) {
@@ -56,9 +54,17 @@ class Bola {
                 // this.posicio.y = this.radi;
                 // xoc = true;
                 // this.vy = -this.vy;
+                if(sound){
+                    console.log("audio is on")
+                    audios.levelUp.play();
+                } else {
+                    console.log("audio is off")
+                }
+
                 this.posicio_rand();
                 this.joc.nextLevel();
                 console.log("next level");
+
 
             }
 
@@ -106,6 +112,8 @@ class Bola {
                     joc.punts+=5; // cada color == els seus punts.
                     Display.updatePunts(joc.punts);
                     joc.totxos.splice(i, 1);
+
+                    
                 }
             }
             // END
@@ -134,14 +142,19 @@ class Bola {
                         break;
                 }
             }
-            
+            if(xoc && sound){
+                console.log("audio is on")
+                audios.boing.play();
+            }
             
             if(xoc_inferior){
                 this.restaVida();
                 if (joc.vides==0){
+                    if(sound) audios.gameOver.play();
+
                     this.enabled=false;
                     this.joc.gameOver();
-                }
+                } else if(sound) audios.error.play();
             } else {
                 if (!xoc) {
                     this.posicio.x = trajectoria.puntB.x;

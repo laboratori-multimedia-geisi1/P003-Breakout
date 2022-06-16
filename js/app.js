@@ -2,11 +2,15 @@ var joc=null,
     sound=true;
 
 var audios={
-    xoc:new Audio("audio/audio_fail.mp3"),
+    boing:new Audio("audios/pong.mp3"),
+    background:new Audio("audios/background.mp3"),
+    error:new Audio("audios/error.mp3"),
+    levelUp:new Audio("audios/level_up.mp3"),
+    gameOver:new Audio("audios/game_over.mp3")
 }
+audios.background.loop=true;
+audios.background.volume=0.3;
 
-// localStorage.removeItem("records");
-// console.log(localStorage.getItem("records"))
 
 $.fn.flashUnlimited=function(){
     $(this).fadeTo(700,0.1,function(){
@@ -15,12 +19,12 @@ $.fn.flashUnlimited=function(){
 }
 
 $(document).ready(function() {
-    var elem=$(".elim");
-
+    
     $("#game-menu-start").flashUnlimited();
 
     $("#game-menu-start").click(function(){
         spawnMenu();
+        audios.background.play();
     });
     
     $(".tria_nivell").click(function(){
@@ -35,6 +39,13 @@ $(document).ready(function() {
     
 
     $("#sound_val").click(function(){
+        if(sound){
+            audios.background.pause();
+        } else {
+            audios.background.currentTime=0;
+            audios.background.play();
+        }
+        
         sound=!sound;
         Display.setSound(sound);
     });
@@ -46,8 +57,7 @@ function animacio() {
     requestAnimationFrame(animacio);
 }
 function spawnCanvas(){
-    // aquest tamany semble tenir menys errors.
-    h=371; // parseInt(window.innerHeight*0.5); 
+    h=371;
     w=parseInt(h/1.2);
     $("#joc-holder").html("<canvas id=\"joc\" width=\""+w+"px\" height=\""+h+"px\" ></canvas> ");
     $("#principal-holder").css({
@@ -106,14 +116,13 @@ function eliminarRecords(elem){
 }
 
 function spawnMain(){
-    $("#go_back").show();
-    $("#go_back").click(function(){
-        spawnMenu()
-    });
-
     let username=$("#user").val();
     if(username){  
         spawnCanvas();
+        $("#go_back").show();
+        $("#go_back").click(function(){
+            spawnMenu()
+        });
 
         let myCanvas=document.getElementById("joc");
         let ctx=myCanvas.getContext("2d");
@@ -134,13 +143,11 @@ function spawnMain(){
 function spawnMenu(){
     records2table(localStorage.getItem("records"));
 
-    // only lets delete once?
     $(".elim").click(function(){
         console.log("this");
         eliminarRecords(this);
         console.log($(".elim"));
     });
-    
         
     $("#init").hide();
     $("#go_back").hide();

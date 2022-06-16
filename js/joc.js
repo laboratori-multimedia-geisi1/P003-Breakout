@@ -221,7 +221,7 @@ class Joc{
         this.start=true;
         
         this.level+=1;
-        Display.updateLevel(this.level+1);
+        Display.updateLevel(this.level+1-this.starting_level);
         this.totxos=this.mur.generate_totxos(this.lvls[this.level%this.lvls.length]);
     }
 
@@ -230,15 +230,7 @@ class Joc{
     levels(){ 
         this.lvls=[
             {
-                color:null,
-                pos:[
-                    "  ",
-                    "  ",
-                    "  "
-                ],
-            },
-            {
-                color:null,
+                color:null, // a cada lletra li assignem un color different.
                 pos:[
                     "rrr",
                     "ggg",

@@ -14,8 +14,7 @@ class Pala {
                 joc.amplada -this.amplada,
                 this.posicio.x + this.vx
             )
-        }
-        else if(joc.key.LEFT.pressed){
+        } else if(joc.key.LEFT.pressed){
             this.posicio.x = Math.max(0, this.posicio.x - this.vx);
         }
 
@@ -29,9 +28,5 @@ class Pala {
         ctx.fillRect(this.posicio.x, this.posicio.y, this.amplada, this.alcada);
         ctx.restore();
 
-    }
-    mou(x,y){ // ???
-        this.posicio.x += x;
-        this.posicio.y += y;
     }
 }
